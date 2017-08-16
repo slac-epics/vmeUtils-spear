@@ -1,0 +1,58 @@
+record(ai, "$(ioc):CpuTemp")
+{
+	field(DESC, "CPU Core Temperature")
+	field(DTYP, "BusAddress")
+# supply dummy base address - the 'tau' read access method is all we need
+	field(INP,  "#C0 S0 @0xdeadbeef,tau")
+	field(AOFF,	"0")
+	field(ASLO, "0.0")
+	field(HIHI, "50")
+	field(HIGH, "45")
+	field(LOW,  "0")
+	field(LOLO, "0")
+	field(EGU,  "C")
+	field(PREC, "0")
+	field(PINI, "YES")
+	field(HOPR, "60")
+	field(LOPR, "0")
+	field(HYST, "1")
+	field(LSV,  "MINOR")
+	field(HSV,  "MINOR")
+	field(LLSV, "MAJOR")
+	field(HHSV, "MAJOR")
+	field(LINR, "LINEAR")
+	field(SCAN, "2 second")
+}
+
+record(bi, "$(ioc):NvramBatStat")
+{
+	field(DESC, "RTC/NVRAM Battery Status")
+	field(DTYP, "BusAddress")
+	field(INP,  "#C0 S0 @svgmRTC+0,be8")
+	field(ZNAM, "OK")
+	field(ONAM, "Battery Low")
+	field(OSV,  "MAJOR")	
+	field(MASK, "16")
+	field(PINI, "YES")
+	field(SCAN, "10 second")
+}
+
+record(sub, "$(ioc):UartBreak")
+{
+	field(DESC, "Uart break state" )
+	field(PINI, "YES")
+	field(VAL, "$(rebootOnBreak)")
+	field(SNAM, "svgmUartBreak")
+}
+
+#record(bi, "$(ioc):RTCTest")
+#{
+#	field(DESC, "RTC/NVRAM 4s Ticker")
+#	field(DTYP, "BusAddress")
+#	field(INP,  "#C0 S0 @0xffe9fff0+9,be8")
+#	field(ZNAM, "TickLo")
+#	field(ONAM, "TickHi")
+#	field(ZSV,  "MAJOR")	
+#	field(MASK, "4")
+#	field(SCAN, "1 second")
+#}

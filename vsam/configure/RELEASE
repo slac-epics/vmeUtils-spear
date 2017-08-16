@@ -1,0 +1,55 @@
+#RELEASE Location of external products
+# Run "gnumake clean uninstall install" in the application
+# top directory each time this file is changed.
+#include $(TOP)/RELEASE_SITE
+
+#include $(TOP)/../../../configure/RELEASE-MODULES-master
+include $(TOP)/../../../RELEASE_SITE_3.15
+include $(TOP)/../configure/RELEASE-MODULES-master
+#include $(TOP)/../../../configure/RELEASE-master
+EPICS_BASE=$(EPICS_SITE_TOP_SPEAR)/3.15.5epics/base
+
+# If you don't want to install into $(TOP) then
+# define INSTALL_LOCATION_APP here
+#INSTALL_LOCATION_APP=<fullpathname>
+
+# =============================================================
+# Define the top of the EPICS tree for your site.
+# We will build some tools/scripts that allow us to
+# change this easily when relocating software.
+# ==============================================================
+#EPICS_SITE_TOP=/nfs/slac/g/lcls/build/epics
+#TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
+
+
+# =============================================================
+# Define location of module tree with respect to
+# EPICS_SITE_TOP
+# =============================================================
+#EPICS_MODULES=$(MODULES_SITE_TOP)
+
+# ==============================================================
+# Define the cvs module version of EPICS BASE that you will use
+# =============================================================
+#BASE_MODULE_VERSION=$(EPICS_BASE_VER)
+
+# =============================================================
+# Define the version of modules needed by
+# IOC apps or other Support apps
+# =============================================================
+#MISCUTILS_MODULE_VERSION=miscUtils-R2-2-2
+#VME_CARD_RECORD_MODULE_VERSION=vmeCardRecord-R2-2-1
+
+# ===============================================================================
+#  Module Location
+# ===============================================================================
+#MISCUTILS=$(EPICS_MODULES)/miscUtils/$(MISCUTILS_MODULE_VERSION)
+#VME_CARD_RECORD=$(EPICS_MODULES)/vmeCardRecord/$(VME_CARD_RECORD_MODULE_VERSION)
+
+# =================================================================
+# Define EPICS_BASE
+# EPICS_BASE usually appears last so other apps can override stuff:
+# =================================================================
+#EPICS_BASE=$(EPICS_SITE_TOP)/base/$(BASE_MODULE_VERSION)
+
+# End of file

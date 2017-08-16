@@ -1,0 +1,50 @@
+
+                 VSAM VME Address Assignents
+                -----------------------------
+
+The VSAM module uses the VMEbus address A24. The VME address is selected
+using onboard dip switches SW1 and SW2.
+
+The vxWorks script VSAMInit.cmd is used to look for a block of VME
+Address assigned specificially to VSAM modules. To do this the 
+user needs to envoke  the funtion VSAM_init() prior to executing 
+the EPICS function iocInit(). 
+
+The function VSAM_init() assigns a card number (0-15) and
+corresponding VME address to each VSAM module.
+The EPICS driver then refers to the VSAM module from the database
+by card number. The driver is then able obtain a cards the 
+corresponding local VME bus address.
+
+Note, that the address supplied in VSAM_init() is 
+a VME system bus address, which is basically the offset
+from the base address space, which in this case is A24.
+The VSAM_init() software converts the specified address
+in argument 1 to the local VME bus address, which is needed 
+to access to the module on the bus. The initiaization
+function prototype and argument specifications are listed below.
+
+      VSAM_init(long *addr,short num,short first)
+
+      addr  - Base A24 address (VME system bus address)
+      num   - Number of cards installed in crate (0-15)
+      first - First card number
+
+Each VSAM module has 0x100 bytes of A24  I/O space.  
+The following example means that 5 VSAM modules will be
+looked for on the bus, with the address assignments
+below:
+
+
+     Example) 
+    
+          VSAM_init(0x400000,2,5)
+
+         Item #      Card #     System Bus Address
+        --------   ---------  ----------------------
+          1           2         0x400000
+          2           3         0x400100
+          3           4         0x400200
+          4           5         0x400300
+          5           6         0x400400
+

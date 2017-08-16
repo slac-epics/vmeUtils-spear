@@ -1,0 +1,8 @@
+# If you don't want to install into $(TOP) then
+# define INSTALL_LOCATION_APP here
+INSTALL_LOCATION_APP=$(TOP)/..
+INSTALL_LOCATION=$(TOP)/..
+
+#MSI=$(EPICS_BASE)/../extensions/bin/$(EPICS_HOST_ARCH)/msi
+
+CONFIG_INSTALLS = ../RULES_BUILD

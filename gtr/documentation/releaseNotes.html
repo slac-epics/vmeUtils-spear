@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+    "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+  <title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body text="#000000" bgcolor="#FFFFFF" link="#0000EE" vlink="#551A8B"
+alink="#FF0000">
+
+<center>
+<h1>Generic Transient Recorder</h1>
+</center>
+
+<center>
+<h1>Release 2.3 March 2006</h1>
+</center>
+
+<h2>General</h2>
+<p>Changes to ease building on different targets.   UniverseDMA support is disabled by default.</p>
+<p>First widely-released R3.14, operating-system-independent version.</p>
+
+
+<center>
+<h1>Release 2.1 June 2005</h1>
+</center>
+
+<h2>Joerger</h2>
+<p>The VTR10012 support now also includes support for the VTR10014.
+Note that two additional arguments are available for vtr10012Config</p>
+<ul>
+   <li>nchannels - the default is 8<li>
+   <li>kilosamplesPerChan - The default is 256</li>
+</ul>
+
+
+
+<h2>General</h2>
+<ul>
+  <li>Converted to R3.14 build rules.</li>
+  <li>Converted to operating-system-independent routines.</li>
+  <li>Some devices tested on both RTEMS and vxWorks.</li>
+</ul>
+
+<center>
+<h1>Release 1.2  August 2003</h1>
+</center>
+
+<h2>sisfadc</h2>
+<ul>
+  <li>IMPORTANT - sisfadcConfig now has an additional argument 'useDma'. This
+    must be specified correctly. For example the example sis3300
+    configuration command was:
+    <pre>sisfadcConfig(4,100,0x90000000,0x86,3)
+    </pre>
+    <p>and is now</p>
+    <pre>sisfadcConfig(4,100,0x90000000,0x86,3,1)</pre>
+  </li>
+  <li>Channels without an associated waveform record no longer cause memory
+    corruption.  Omitting waveform records for unused input channels speeds
+    up readout time.</li>
+</ul>
+</body>
+</html>

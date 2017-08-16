@@ -1,0 +1,7 @@
+# VSAM Device and Device Support
+LIBOBJS += drvVSAM.o
+LIBOBJS += devAiVSAM.o
+LIBOBJS += devBiVSAM.o
+LIBOBJS += devBoVSAM.o
+LIBOBJS += devCardVSAM.o
+

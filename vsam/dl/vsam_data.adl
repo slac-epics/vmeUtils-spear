@@ -1,0 +1,504 @@
+file {
+	name="vsam_data.dl"
+}
+display {
+	magic="305419896"
+	majv="2"
+	mnrv="4"
+	ndyng="0"
+	npc="3"
+	nstr="57"
+	ndynamic="1"
+	nplot="0"
+	nrd="2"
+	nes="0"
+	nkd="1"
+	npd="1"
+	npo="0"
+	object {
+		x="0"
+		y="0"
+		width="338"
+		height="142"
+	}
+	clr="1"
+	bclr="11"
+	nwords_dspy="1250"
+	nwords_sta="272"
+	nwords_cmap="0"
+	nwords_crules="0"
+	odyng="840"
+	osta="568"
+	odynamic="840"
+	oplot="906"
+	ord="906"
+	oes="1226"
+	okd="1226"
+	opd="1238"
+	opo="1250"
+	opc="68"
+	ostr="102"
+	ocmap="568"
+	ocrules="568"
+	style="solid"
+	fill="outline"
+	width="0"
+	clrmod="static"
+	vismod="static"
+	precision="-1"
+	clrrule="alarm"
+	pv=""
+	cmap="Color.dl"
+	pixwid="1152"
+	pixht="900"
+	mmwid="325"
+	mmht="254"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="16"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"rectangle" {
+	object {
+		x="0"
+		y="0"
+		width="154"
+		height="72"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="0"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="5"
+		y="5"
+		width="145"
+		height="26"
+		groupid="0"
+	}
+	textix="$(S)"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="13"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="275"
+		y="105"
+		width="61"
+		height="24"
+		groupid="0"
+	}
+	textix="Volts"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"line" {
+	object {
+		x="148"
+		y="71"
+		width="197"
+		height="0"
+		groupid="0"
+	}
+	npoints="2"
+	point[0] {
+		x="148"
+		y="71"
+	}
+	point[1] {
+		x="345"
+		y="71"
+	}
+	orgpoint[0] {
+		x="0"
+		y="-1"
+	}
+	orgpoint[1] {
+		x="1000"
+		y="-1"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="0"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="6"
+		y="41"
+		width="146"
+		height="26"
+		groupid="0"
+	}
+	textix="VSAM $(D) $(C)"
+	align="horiz. left"
+}
+"text update" {
+	object {
+		x="114"
+		y="98"
+		width="157"
+		height="39"
+		groupid="0"
+	}
+	monitor {
+		chan="$(S):V$(D)_data$(C)"
+		clr="9"
+		bclr="14"
+		label="none"
+		clrmod="rule"
+		rulechan[0] = "$(S):V$(D)_data$(C).SEVR"
+		rulechan[1] = "$(S):V$(D)_data$(C).SEVR"
+		rulechan[2] = "$(S):V$(D)_data$(C).SEVR"
+		rulechan[3] = ""
+		rulechan[4] = ""
+		rulechan[5] = ""
+		rulechan[6] = ""
+		rulechan[7] = ""
+		rulechan[8] = ""
+		rulechan[9] = ""
+		rulechan[10] = ""
+		rulechan[11] = ""
+		rulechan[12] = ""
+		rulechan[13] = ""
+		rulechan[14] = ""
+		rulechan[15] = ""
+		clrrule="alarm"
+		clrargs="C=$(S):V$(D)_data$(C)"
+		rulecolorbg="1"
+		rulecolorfg="1"
+		hdl="0"
+		ldl="0"
+		prec="5"
+		newunits=""
+		units="none"
+		decorate="outward"
+		convertFunc=""
+		convertParams=""
+	}
+	align="horiz. centered"
+	format="decimal- compact"
+}
+"related display" {
+	object {
+		x="20"
+		y="99"
+		width="75"
+		height="36"
+		groupid="0"
+	}
+	selfkill="off"
+	display[0] {
+		label="AC,Range"
+		name="vsam_details.dl"
+		args="S=$(S),D=$(D),C=$(C)"
+	}
+	display[1] {
+		label=""
+		name=""
+		args=""
+	}
+	display[2] {
+		label=""
+		name=""
+		args=""
+	}
+	display[3] {
+		label=""
+		name=""
+		args=""
+	}
+	display[4] {
+		label=""
+		name=""
+		args=""
+	}
+	display[5] {
+		label=""
+		name=""
+		args=""
+	}
+	display[6] {
+		label=""
+		name=""
+		args=""
+	}
+	display[7] {
+		label=""
+		name=""
+		args=""
+	}
+	display[8] {
+		label=""
+		name=""
+		args=""
+	}
+	display[9] {
+		label=""
+		name=""
+		args=""
+	}
+	display[10] {
+		label=""
+		name=""
+		args=""
+	}
+	display[11] {
+		label=""
+		name=""
+		args=""
+	}
+	display[12] {
+		label=""
+		name=""
+		args=""
+	}
+	display[13] {
+		label=""
+		name=""
+		args=""
+	}
+	display[14] {
+		label=""
+		name=""
+		args=""
+	}
+	display[15] {
+		label=""
+		name=""
+		args=""
+	}
+	display[16] {
+		label=""
+		name=""
+		args=""
+	}
+	display[17] {
+		label=""
+		name=""
+		args=""
+	}
+	display[18] {
+		label=""
+		name=""
+		args=""
+	}
+	display[19] {
+		label=""
+		name=""
+		args=""
+	}
+	display[20] {
+		label=""
+		name=""
+		args=""
+	}
+	display[21] {
+		label=""
+		name=""
+		args=""
+	}
+	display[22] {
+		label=""
+		name=""
+		args=""
+	}
+	display[23] {
+		label=""
+		name=""
+		args=""
+	}
+	clr="1"
+	bclr="10"
+	menu_title="AC,Range"
+	decorate="outward"
+}
+"related display" {
+	object {
+		x="249"
+		y="37"
+		width="84"
+		height="27"
+		groupid="0"
+	}
+	selfkill="off"
+	display[0] {
+		label="Help"
+		name="Help.dl"
+		args=""
+	}
+	display[1] {
+		label=""
+		name=""
+		args=""
+	}
+	display[2] {
+		label=""
+		name=""
+		args=""
+	}
+	display[3] {
+		label=""
+		name=""
+		args=""
+	}
+	display[4] {
+		label=""
+		name=""
+		args=""
+	}
+	display[5] {
+		label=""
+		name=""
+		args=""
+	}
+	display[6] {
+		label=""
+		name=""
+		args=""
+	}
+	display[7] {
+		label=""
+		name=""
+		args=""
+	}
+	display[8] {
+		label=""
+		name=""
+		args=""
+	}
+	display[9] {
+		label=""
+		name=""
+		args=""
+	}
+	display[10] {
+		label=""
+		name=""
+		args=""
+	}
+	display[11] {
+		label=""
+		name=""
+		args=""
+	}
+	display[12] {
+		label=""
+		name=""
+		args=""
+	}
+	display[13] {
+		label=""
+		name=""
+		args=""
+	}
+	display[14] {
+		label=""
+		name=""
+		args=""
+	}
+	display[15] {
+		label=""
+		name=""
+		args=""
+	}
+	display[16] {
+		label=""
+		name=""
+		args=""
+	}
+	display[17] {
+		label=""
+		name=""
+		args=""
+	}
+	display[18] {
+		label=""
+		name=""
+		args=""
+	}
+	display[19] {
+		label=""
+		name=""
+		args=""
+	}
+	display[20] {
+		label=""
+		name=""
+		args=""
+	}
+	display[21] {
+		label=""
+		name=""
+		args=""
+	}
+	display[22] {
+		label=""
+		name=""
+		args=""
+	}
+	display[23] {
+		label=""
+		name=""
+		args=""
+	}
+	clr="1"
+	bclr="10"
+	menu_title="Help"
+	decorate="outward"
+}
+"kill display" {
+	object {
+		x="249"
+		y="5"
+		width="84"
+		height="27"
+		groupid="0"
+	}
+	label="Exit"
+	clr="1"
+	bclr="15"
+	decorate="none"
+}
+"print display" {
+	object {
+		x="159"
+		y="4"
+		width="84"
+		height="27"
+		groupid="0"
+	}
+	label="Print"
+	clr="1"
+	bclr="10"
+	decorate="none"
+}

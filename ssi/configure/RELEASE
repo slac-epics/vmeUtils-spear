@@ -1,0 +1,14 @@
+#RELEASE Location of external products
+# Run "gnumake clean uninstall install" in the application
+# top directory each time this file is changed.
+
+#TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
+
+# EPICS_BASE usually appears last so other apps can override stuff:
+#EPICS_BASE=/APSshare/epics/base-3.14.8.2
+
+#include $(TOP)/../../../configure/RELEASE-MODULES-master
+include $(TOP)/../../../RELEASE_SITE_3.15
+include $(TOP)/../configure/RELEASE-MODULES-master
+#include $(TOP)/../../../configure/RELEASE-master
+EPICS_BASE=$(EPICS_SITE_TOP_SPEAR)/3.15.5epics/base

@@ -1,0 +1,36 @@
+#
+# Caen V965 Charge Integrating ADC (QDC)
+#
+record( longin, "$(S)_$(SS):$(DEV):IPED")
+        {
+        field( DESC, "Pedestal FOR QDC")
+        field( SCAN, "1 second")
+        field( PINI, "YES")
+        field( DTYP, "CAEN V965")
+        field( INP, "#C$(CD) S0 @I")
+        field( HOPR, "65535")
+        field( LOPR, "0")
+        }
+record( longout, "$(S)_$(SS):$(DEV):IPEDSet")
+        {
+        field( DESC, "Pedestal FOR QDC")
+        field( SCAN, "Passive")
+        field( PINI, "YES")
+        field( DTYP, "CAEN V965")
+        field( OUT, "#C$(CD) S0 @I")
+        field( HOPR, "255")
+        field( DRVH, "255")
+        field( LOPR, "0")
+        field( DRVL, "0")
+        }
+
+record( longin, "$(S)_$(SS):$(DEV):SN")
+        {
+        field( DESC, "Pedestal FOR QDC")
+        field( SCAN, "1 second")
+        field( PINI, "YES")
+        field( DTYP, "CAEN V965")
+        field( INP, "#C$(CD) S0 @N")
+        field( HOPR, "65535")
+        field( LOPR, "0")
+        }

@@ -1,0 +1,51 @@
+==============================================================
+#
+#  Name: RELEASE_NOTES
+#
+#  Rem:  This file contains the the release notes for
+#        the VME Card Record..
+#
+#  Auth: 22-Jun-2007, K. Luchini         (LUCHINI)
+#  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
+#--------------------------------------------------------------
+#  Mod:
+#        20-Mar-2010, S. Hoobler         (SONYA):
+#          release vmeCardRecord-R2-2-0
+#        23-Feb-2010, K. Luchini         (LUCHINI):
+#          release vmeCardRecord-R2-1-0
+#        27-Apr-2009, K. Luchini         (LUCHINI):
+#          release vmeCardRecord-R2-0-0
+#        21-Feb-2008, K. Luchini         (LUCHINI):
+#          release vmeCardRecord-R1-0-3-1
+#        08-Oct-2007, K. Luchini         (LUCHINI):
+#          release vmeCardRecord-R1-0-3
+#        08-Oct-2007, K. Luchini         (LUCHINI):
+#          release vmeCardRecord-R1-0-2
+#        22-Jun-2007, K. Luchini         (LUCHINI):
+#          release vmeCardRecord-R1-0-1
+#        22-May-2007, K. Luchini         (LUCHINI):
+#          release vmeCardRecord-R1-0-0
+#
+#==============================================================
+#
+vmeCardRecord-R2-2-1: Modify RELEASE file to build with style of eco
+
+vmeCardRecord-R2-2-0: Build with epics-R3-14-8-2-lcls6
+                       Build with rtems-4.9.4
+
+vmeCardRecord-R2-1-0: Build with epics-R3-14-8-2-lcls5
+                       Build with rtems-4.9.3
+
+vmeCardRecord-R2-0-0: Build with epics-R3-14-8-2-lcls3
+                       Build with rtems-4.9.1
+
+vmeCardRecord-R1-0-3-1: Replace CONFIG_APP with CONFIG_SITE
+                        Add RELEASE_SITE
+
+vmeCardRecord-R1-0-3: Build with base-R2-14-9-lcls1 (RTEMS 4.7.1)
+
+vmeCardRecord-R1-0-2: Build with base-R3-14-8-2-lcls2 (RTEMS 4.7.1)
+
+vmeCardRecord-R1-0-1: Pickup epics/base-R1-0-0 from new build area
+
+vmeCardRecord-R1-0-0: Convert to RTEMS using EPICS OSI support.

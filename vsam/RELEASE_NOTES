@@ -1,0 +1,60 @@
+#==============================================================
+#
+#  Name: RELEASE_NOTES
+#
+#  Rem:  This file contains the the release notes for
+#        the VSAM module which has been modified at SLAC.
+#
+#        The initial version of this software written 
+#        by Susanna Jacobson from LBL and modified
+#        by Dayle Kotturi at SLAC.
+#
+#  Auth: 22-May-2007, K. Luchini         (LUCHINI)
+#  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
+#--------------------------------------------------------------
+#  Mod:
+#        20-Mar-2010, S. Hoobler         (SONYA):
+#          release vsam-R2-2-0
+#        23-Feb-2010, K. Luchini         (LUCHINI):
+#          release vsam-R2-1-0
+#        27-Apr-2009, K. Luchini         (LUCHINI):
+#          release vsam-R2-0-0
+#        23-Feb-2008, K. Luchini         (LUCHINI):
+#          release vsam-R1-0-3-1
+#        08-Jul-2007, K. Luchini         (LUCHINI):
+#          release vsam-R1-0-3
+#          release vsam-R1-0-2
+#        26-Sep-2007, E. Williams        (ERNESTO):
+#          release vsam-R1-0-1
+#        02-Jul-2007, K. Luchini         (LUCHINI):
+#          release vsam-R1-0-0
+#
+#==============================================================
+#
+vsam-R2-2-1:   Build with vmeCardRecord-R2-2-1 and miscUtils-R2-2-2
+
+vsam-R2-2-0:   Build with epics-R3-14-8-2-lcls6
+               Build with rtems-4.9.4
+
+vsam-R2-1-0:   Build with epics-R3-14-8-2-lcls5
+               Build with rtems-4.9.3
+
+vsam-R2-0-0:   Build with epics-R3-14-8-2-lcls3
+               Build with rtems-4.9.1
+
+vsam-R1-0-3-1: Build with miscUtils-R1-0-2-1
+               Build with vmeCardRecord-R1-0-3-1
+               Replace CONFIG_APP with CONFIG_SITE
+               Add RELEASE_SITE
+
+vsam-R1-0-3: Build with base-R3-14-9-lcls1 (RTEMS-4.7.1)
+             Build with miscUtils-R1-0-2
+             Build with vmeCardRecord-R1-0-3
+
+vsam-R1-0-2: Build with base-R3-14-8-2-lcls2 (RTEMS 4.7.1)
+             Build with miscUtils-R1-0-1
+             Build with vmeCardRecord-R1-0-2
+
+vsam-R1-0-1: Build with miscUtils-R1-0-0
+
+vsam-R1-0-0: Convert to RTEMS using EPICS OSI support.

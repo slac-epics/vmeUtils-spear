@@ -1,0 +1,23 @@
+#==============================================================
+#
+#  Abs:  EPICS Application Database definition for the 
+#        BiRa VME-7305 (VSAM)
+#      
+#  Name: VSAMInclude.dbd
+#
+#  Facility:  LBL  
+#
+#  Auth: 18-Feb-1999, Author's Name  (USERNAME)
+#  Rev:  dd-mmm-yyyy, First Lastname (USERNAME)
+#
+#--------------------------------------------------------------
+#  Mod:
+#       dd-mmm-yyyy, First Lastname (USERNAME):
+#          comments
+#
+#==============================================================
+#
+include "base.dbd"
+include "vmeCardRecord.dbd"
+include "devVSAM.dbd"
+include "devVSAMCard.dbd"

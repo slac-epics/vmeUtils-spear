@@ -1,0 +1,754 @@
+file {
+	name="vsam_summary.dl"
+}
+display {
+	magic="305419896"
+	majv="2"
+	mnrv="4"
+	ndyng="1"
+	npc="7"
+	nstr="121"
+	ndynamic="2"
+	nplot="0"
+	nrd="3"
+	nes="0"
+	nkd="1"
+	npd="1"
+	npo="0"
+	object {
+		x="0"
+		y="0"
+		width="364"
+		height="299"
+	}
+	clr="1"
+	bclr="11"
+	nwords_dspy="2252"
+	nwords_sta="296"
+	nwords_cmap="0"
+	nwords_crules="0"
+	odyng="1556"
+	osta="1260"
+	odynamic="1612"
+	oplot="1748"
+	ord="1748"
+	oes="2228"
+	okd="2228"
+	opd="2240"
+	opo="2252"
+	opc="68"
+	ostr="166"
+	ocmap="1260"
+	ocrules="1260"
+	style="solid"
+	fill="outline"
+	width="0"
+	clrmod="static"
+	vismod="static"
+	precision="-1"
+	clrrule="alarm"
+	pv=""
+	cmap="Color.dl"
+	pixwid="1152"
+	pixht="900"
+	mmwid="325"
+	mmht="254"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="16"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"rectangle" {
+	object {
+		x="0"
+		y="0"
+		width="182"
+		height="69"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="13"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="19"
+		y="126"
+		width="160"
+		height="28"
+		groupid="0"
+	}
+	textix="Scan Mode:"
+	align="horiz. left"
+}
+"text" {
+	object {
+		x="21"
+		y="82"
+		width="160"
+		height="28"
+		groupid="0"
+	}
+	textix="Data Mode:"
+	align="horiz. left"
+}
+"text" {
+	object {
+		x="18"
+		y="184"
+		width="285"
+		height="26"
+		groupid="0"
+	}
+	textix="Calibration Status:"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="0"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="4"
+		y="3"
+		width="160"
+		height="26"
+		groupid="0"
+	}
+	textix="$(S)"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"line" {
+	object {
+		x="167"
+		y="68"
+		width="197"
+		height="0"
+		groupid="0"
+	}
+	npoints="2"
+	point[0] {
+		x="167"
+		y="68"
+	}
+	point[1] {
+		x="364"
+		y="68"
+	}
+	orgpoint[0] {
+		x="0"
+		y="-1"
+	}
+	orgpoint[1] {
+		x="1000"
+		y="-1"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="0"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="4"
+		y="34"
+		width="160"
+		height="26"
+		groupid="0"
+	}
+	textix="VSAM $(D)"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="9"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"<<dynamic attribute>>" {
+	attr {
+		mod {
+			clrmod="rule"
+			vis="static"
+		}
+		param {
+			rulecolorfg="1"
+			rulecolorbg="1"
+			chan="$(S):V$(D)_st_cal_succ"
+			rulechan[0] = "$(S):V$(D)_st_cal_succ.SEVR"
+			rulechan[1] = "$(S):V$(D)_st_cal_succ.SEVR"
+			rulechan[2] = "$(S):V$(D)_st_cal_succ.SEVR"
+			rulechan[3] = ""
+			rulechan[4] = ""
+			rulechan[5] = ""
+			rulechan[6] = ""
+			rulechan[7] = ""
+			rulechan[8] = ""
+			rulechan[9] = ""
+			rulechan[10] = ""
+			rulechan[11] = ""
+			rulechan[12] = ""
+			rulechan[13] = ""
+			rulechan[14] = ""
+			rulechan[15] = ""
+			clrrule="alarm"
+			clrargs="C=$(S):V$(D)_st_cal_succ"
+		}
+	}
+}
+"oval" {
+	object {
+		x="319"
+		y="184"
+		width="27"
+		height="26"
+		groupid="0"
+	}
+}
+"toggle button" {
+	object {
+		x="194"
+		y="121"
+		width="152"
+		height="38"
+		groupid="0"
+	}
+	control {
+		chan="$(S):V$(D)_md_scan"
+		clr="6"
+		bclr="14"
+		label="none"
+		clrmod="rule"
+		rulechan[0] = "$(S):V$(D)_md_scan.SEVR"
+		rulechan[1] = "$(S):V$(D)_md_scan.SEVR"
+		rulechan[2] = "$(S):V$(D)_md_scan.SEVR"
+		rulechan[3] = ""
+		rulechan[4] = ""
+		rulechan[5] = ""
+		rulechan[6] = ""
+		rulechan[7] = ""
+		rulechan[8] = ""
+		rulechan[9] = ""
+		rulechan[10] = ""
+		rulechan[11] = ""
+		rulechan[12] = ""
+		rulechan[13] = ""
+		rulechan[14] = ""
+		rulechan[15] = ""
+		clrrule="alarm"
+		clrargs="C=$(S):V$(D)_md_scan"
+		rulecolorbg="1"
+		rulecolorfg="1"
+		hdl="0"
+		ldl="0"
+		prec="-1"
+		newunits=""
+		units="none"
+		decorate="none"
+		convertFunc=""
+		convertParams=""
+	}
+	zero_label=""
+	one_label=""
+}
+"toggle button" {
+	object {
+		x="194"
+		y="77"
+		width="152"
+		height="38"
+		groupid="0"
+	}
+	control {
+		chan="$(S):V$(D)_md_data"
+		clr="6"
+		bclr="14"
+		label="none"
+		clrmod="rule"
+		rulechan[0] = "$(S):V$(D)_md_data.SEVR"
+		rulechan[1] = "$(S):V$(D)_md_data.SEVR"
+		rulechan[2] = "$(S):V$(D)_md_data.SEVR"
+		rulechan[3] = ""
+		rulechan[4] = ""
+		rulechan[5] = ""
+		rulechan[6] = ""
+		rulechan[7] = ""
+		rulechan[8] = ""
+		rulechan[9] = ""
+		rulechan[10] = ""
+		rulechan[11] = ""
+		rulechan[12] = ""
+		rulechan[13] = ""
+		rulechan[14] = ""
+		rulechan[15] = ""
+		clrrule="alarm"
+		clrargs="C=$(S):V$(D)_md_data"
+		rulecolorbg="1"
+		rulecolorfg="1"
+		hdl="0"
+		ldl="0"
+		prec="-1"
+		newunits=""
+		units="none"
+		decorate="none"
+		convertFunc=""
+		convertParams=""
+	}
+	zero_label=""
+	one_label=""
+}
+"related display" {
+	object {
+		x="18"
+		y="236"
+		width="128"
+		height="43"
+		groupid="0"
+	}
+	selfkill="off"
+	display[0] {
+		label="Ch 0"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=0"
+	}
+	display[1] {
+		label="Ch 1"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=1"
+	}
+	display[2] {
+		label="Ch 2"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=2"
+	}
+	display[3] {
+		label="Ch 3"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=3"
+	}
+	display[4] {
+		label="Ch 4"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=4"
+	}
+	display[5] {
+		label="Ch 5"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=5"
+	}
+	display[6] {
+		label="Ch 6"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=6"
+	}
+	display[7] {
+		label="Ch 7"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=7"
+	}
+	display[8] {
+		label="Ch 8"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=8"
+	}
+	display[9] {
+		label="Ch 9"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=9"
+	}
+	display[10] {
+		label="Ch 10"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=10"
+	}
+	display[11] {
+		label="Ch 11"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=11"
+	}
+	display[12] {
+		label="Ch 12"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=12"
+	}
+	display[13] {
+		label="Ch 13"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=13"
+	}
+	display[14] {
+		label="Ch 14"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=14"
+	}
+	display[15] {
+		label="Ch 15"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=15"
+	}
+	display[16] {
+		label=""
+		name=""
+		args=""
+	}
+	display[17] {
+		label=""
+		name=""
+		args=""
+	}
+	display[18] {
+		label=""
+		name=""
+		args=""
+	}
+	display[19] {
+		label=""
+		name=""
+		args=""
+	}
+	display[20] {
+		label=""
+		name=""
+		args=""
+	}
+	display[21] {
+		label=""
+		name=""
+		args=""
+	}
+	display[22] {
+		label=""
+		name=""
+		args=""
+	}
+	display[23] {
+		label=""
+		name=""
+		args=""
+	}
+	clr="1"
+	bclr="10"
+	menu_title="Chan 0-15"
+	decorate="outward"
+}
+"related display" {
+	object {
+		x="217"
+		y="236"
+		width="129"
+		height="43"
+		groupid="0"
+	}
+	selfkill="off"
+	display[0] {
+		label="Ch 16"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=16"
+	}
+	display[1] {
+		label="Ch 17"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=17"
+	}
+	display[2] {
+		label="Ch 18"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=18"
+	}
+	display[3] {
+		label="Ch 19"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=19"
+	}
+	display[4] {
+		label="Ch 20"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=20"
+	}
+	display[5] {
+		label="Ch 21"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=21"
+	}
+	display[6] {
+		label="Ch 22"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=22"
+	}
+	display[7] {
+		label="Ch 23"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=23"
+	}
+	display[8] {
+		label="Ch 24"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=24"
+	}
+	display[9] {
+		label="Ch 25"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=25"
+	}
+	display[10] {
+		label="Ch 26"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=26"
+	}
+	display[11] {
+		label="Ch 27"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=27"
+	}
+	display[12] {
+		label="Ch 28"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=28"
+	}
+	display[13] {
+		label="Ch 29"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=29"
+	}
+	display[14] {
+		label="Ch 30"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=30"
+	}
+	display[15] {
+		label="Ch 31"
+		name="vsam_data.dl"
+		args="S=$(S),D=$(D),C=31"
+	}
+	display[16] {
+		label=""
+		name=""
+		args=""
+	}
+	display[17] {
+		label=""
+		name=""
+		args=""
+	}
+	display[18] {
+		label=""
+		name=""
+		args=""
+	}
+	display[19] {
+		label=""
+		name=""
+		args=""
+	}
+	display[20] {
+		label=""
+		name=""
+		args=""
+	}
+	display[21] {
+		label=""
+		name=""
+		args=""
+	}
+	display[22] {
+		label=""
+		name=""
+		args=""
+	}
+	display[23] {
+		label=""
+		name=""
+		args=""
+	}
+	clr="1"
+	bclr="10"
+	menu_title="Chan 16-31"
+	decorate="outward"
+}
+"related display" {
+	object {
+		x="276"
+		y="37"
+		width="84"
+		height="27"
+		groupid="0"
+	}
+	selfkill="off"
+	display[0] {
+		label="Help"
+		name="Help.dl"
+		args=""
+	}
+	display[1] {
+		label=""
+		name=""
+		args=""
+	}
+	display[2] {
+		label=""
+		name=""
+		args=""
+	}
+	display[3] {
+		label=""
+		name=""
+		args=""
+	}
+	display[4] {
+		label=""
+		name=""
+		args=""
+	}
+	display[5] {
+		label=""
+		name=""
+		args=""
+	}
+	display[6] {
+		label=""
+		name=""
+		args=""
+	}
+	display[7] {
+		label=""
+		name=""
+		args=""
+	}
+	display[8] {
+		label=""
+		name=""
+		args=""
+	}
+	display[9] {
+		label=""
+		name=""
+		args=""
+	}
+	display[10] {
+		label=""
+		name=""
+		args=""
+	}
+	display[11] {
+		label=""
+		name=""
+		args=""
+	}
+	display[12] {
+		label=""
+		name=""
+		args=""
+	}
+	display[13] {
+		label=""
+		name=""
+		args=""
+	}
+	display[14] {
+		label=""
+		name=""
+		args=""
+	}
+	display[15] {
+		label=""
+		name=""
+		args=""
+	}
+	display[16] {
+		label=""
+		name=""
+		args=""
+	}
+	display[17] {
+		label=""
+		name=""
+		args=""
+	}
+	display[18] {
+		label=""
+		name=""
+		args=""
+	}
+	display[19] {
+		label=""
+		name=""
+		args=""
+	}
+	display[20] {
+		label=""
+		name=""
+		args=""
+	}
+	display[21] {
+		label=""
+		name=""
+		args=""
+	}
+	display[22] {
+		label=""
+		name=""
+		args=""
+	}
+	display[23] {
+		label=""
+		name=""
+		args=""
+	}
+	clr="1"
+	bclr="10"
+	menu_title="Help"
+	decorate="outward"
+}
+"kill display" {
+	object {
+		x="276"
+		y="5"
+		width="84"
+		height="27"
+		groupid="0"
+	}
+	label="Exit"
+	clr="1"
+	bclr="15"
+	decorate="none"
+}
+"print display" {
+	object {
+		x="186"
+		y="4"
+		width="84"
+		height="27"
+		groupid="0"
+	}
+	label="Print"
+	clr="1"
+	bclr="10"
+	decorate="none"
+}

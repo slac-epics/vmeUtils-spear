@@ -1,0 +1,7 @@
+driver(drvCaenV965)
+# ai device support
+device(ai,VME_IO,devCaenV965AI,"CAEN V965")
+# longin device support
+device(longin,VME_IO,devCaenV965Longin,"CAEN V965")
+# longout device support
+device(longout,VME_IO,devCaenV965Longout,"CAEN V965")

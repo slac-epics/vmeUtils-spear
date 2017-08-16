@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta http-equiv="content-type"
+ content="text/html; charset=ISO-8859-1">
+  <title>CAEN V965 Device Support</title>
+</head>
+<body>
+<h3>Device Support for the CAEN V965 QDC Board</h3>
+<br>
+&nbsp; <br>
+<h3>1. Board Configuration and Driver Initialization</h3>
+<div style="text-align: left; margin-left: 40px;">The board address
+switches are located near P1 and P2 at the rear of the card. These are
+rotary switches with 16 positions so each switch sets 4 bits.<br>
+The uppermost switch sets bits &lt;19..16&gt; of the base addresss and
+other switch in the upper pair sets bits &lt;23..20&gt;.&nbsp; The
+lower pair sets bits &lt;27..24&gt; and bits &lt;31..28&gt;.<br>
+By default the card can be addressed using an A24 address defined in
+the upper pair of switches only or an A32 address using all 4
+switched.&nbsp; Note that the MSB is the bottom switch.<br>
+<br>
+Once the board is installed and the crate is powered up the position of
+the on board power switch must be determined.&nbsp; The power switch is
+a alternate action pushbutton switch recessed in the front panel<br>
+between the banks of inputs.&nbsp; The "Busy" led blinks on briefly
+when the crate is reset and the switch is on.&nbsp; If the switch is
+not in the on position then the board will not respond to commands on
+the VME bus.<br>
+<br>
+The Makefile in the src directory builds both a munch file and a
+library file supporting either run time or build time linking.<br>
+To initialize the board on a vxWorks or RTEMS IOC do the following:<br>
+<br>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; width: 100%;">
+  <tbody>
+    <tr>
+      <td style="vertical-align: top;">Add the driver to the IOC's
+RELEASE file</td>
+      <td style="vertical-align: top;">CAEN_V965=$(SHARE_RELEASE)/caen_v965/Initial<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Link or Load the driver.<br>
+      </td>
+      <td style="vertical-align: top;">Build time linking case: Add to
+src/Makefile in your iocApp directory.<br>
+      <pre>timingLabAll_LIBS_vxWorks += caen_v965</pre>
+      <br>
+Run time linking case: Add to st.cmd<br>
+      <pre>cd caen_v965bin</pre>
+      <pre>ld &lt;caen_v965Lib.munch</pre>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Load the dbd file<br>
+      </td>
+      <td style="vertical-align: top;">Build time linking case: (in
+myApp/src/myAppInclude.dbd)<br>
+      <pre>include "caen_V965.dbd"</pre>
+      <br>
+Run time linking case: (in st.cmd)<br>
+      <pre>cd caen_v965</pre>
+      <pre>dbLoadDatabase("dbd/caen_v965.dbd",0,0)</pre>
+      <pre>caen_v965_registerRecordDeviceDriver</pre>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Initialize the driver<br>
+      </td>
+      <td style="vertical-align: top;">
+      <pre>caenV965Config 0, 0xca0000, 24, 0x99, 1, 0</pre>
+Where argument 1 is the board instance number,<br>
+argument 2 is the base address of the board in A24 or A32 space,<br>
+argument 3 is the address space (24 or 32),<br>
+argument 4 is the interrupt vector,<br>
+argument 5 is the interrupt level, and<br>
+argument 6 is the number of samples per cycle, 1 trigger per sample<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Load the database<br>
+      </td>
+      <td style="vertical-align: top;">See the database section.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<h3>2. Device Support</h3>
+The V965 card has a rather specialized register interface.&nbsp; Some
+of the features of this board have been disabled while other features
+have been hidden by the driver in order to provide a standard interface.<br>
+<br>
+Q/D conversion is done using two a/d conversions on each channel such
+that a low range returns values from 0 to 3840 counts and the high
+range returns 0 to 4095 counts scaled by 8.&nbsp; By using the high
+range scaled by multiplying by 8 only when the low range conversion is
+out of range high an effective 15 bit dynamic range is possible. <br>
+<br>
+The sliding scale feature of this board is not supported and is
+disabled by the driver.&nbsp; Our application is mostly single pulse
+and the use of the sliding scale would introduce errors. <br>
+<br>
+The IPED register is supported.&nbsp; The IPED register controls a
+current source connected to each channel so that the internal bias
+currents can be nulled out.&nbsp; For a current measurement this value
+should be set using an open channel and at the operating gate width. <br>
+<br>
+Unused channels, those with no associated records, will be configured
+with the 'kill' bit set in the threshold register.&nbsp; The threshold
+register is not otherwise used.&nbsp; Both under and over range
+readings will be saved on each gate for each active channel and read by
+the ISR.&nbsp; The device support will provide threshold subtraction as
+described below.<br>
+<br>
+The following is the contents of caen_v965.dbd:<br>
+<table border="1" cellpadding="2" cellspacing="2"
+ style="height: 189px; width: 489px;">
+  <tbody>
+    <tr>
+      <td>
+      <pre>driver(drvCaenV965)</pre>
+      <pre># ai device support</pre>
+      <pre>device(ai,VME_IO,devCaenV965AI,"CAEN V965")</pre>
+      <pre># longin device support</pre>
+      <pre>device(longin,VME_IO,devCaenV965Longin,"CAEN V965")</pre>
+      <pre># longout device support</pre>
+      <pre>device(longout,VME_IO,devCaenV965Longout,"CAEN V965")</pre>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<pre><br><br>Device support is provided for record types ai, longin, and longout.  All record types share a common device support layer requiring an INP or OUT field in the record to provide VME_IO parameters.<br>The card field in the record's link is the same card number used in the initialize call.  The signal number field refers to the QDC channel number.  The parameter field can have the following values and meanings.<br><br></pre>
+<table style="text-align: left; width: 400px;" border="1"
+ cellspacing="2" cellpadding="2">
+  <tbody>
+    <tr>
+      <th style="vertical-align: top;">param<br>
+      </th>
+      <th style="vertical-align: top;">Meaning<br>
+      </th>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">'I'<br>
+      </td>
+      <td style="vertical-align: top;">Read and set the IPED Register<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">'N'<br>
+      </td>
+      <td style="vertical-align: top;">Read the board serial number<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">'H'<br>
+      </td>
+      <td style="vertical-align: top;">Read the raw high range ADC
+value for the channel (I/O intr scan supported)<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">'L'<br>
+      </td>
+      <td style="vertical-align: top;">Read the raw low range ADC value
+for the channel (I/O intr scan supported)</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">'S'<br>
+      </td>
+      <td style="vertical-align: top;">Read the status bits for the
+channel.&nbsp; (I/O intr scan supported)<br>
+Bits &lt;3..0&gt; are:<br>
+HIGH Over range, HIGH under range, LOW over range, LOW under range.</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">'TH'<br>
+      </td>
+      <td style="vertical-align: top;">Read and set the high channel
+threshold or zero offset.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">'TL'<br>
+      </td>
+      <td style="vertical-align: top;">Read and set the low channel
+threshold.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">Anything else or nothing<br>
+      </td>
+      <td style="vertical-align: top;">Read the value.&nbsp; (I/O intr
+scan supported) If the low range ADC value is not over range then
+subtract the 'TL' value and return the result. Otherwise, subtract the
+'TH' value from the high range ADC value and return 8* the
+result.&nbsp; Ai record scaling constants should be supplied based on a
+15 bit raw ADC value.<br>
+      <br>
+If the parameter is a number then it sets the multiple sample mode. In
+that case the sample is taken on the Nth trigger on this channel.<br>
+The last chanel to initialize on this channel sets this.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<pre><br></pre>
+<h3>3. API</h3>
+<span style="font-weight: bold;">extern "C" STATUS
+drvCaenV965SetState(int board , int state);</span><br
+ style="font-weight: bold;">
+<span style="font-weight: bold;">void drvCaenV965Device::setState(int
+newState);</span><br style="font-weight: bold;">
+Set the state counter to state.&nbsp; Typically you would set the state
+counter to zero just before triggering a threshold reading.<br
+ style="font-weight: bold;">
+<br style="font-weight: bold;">
+<span style="font-weight: bold;">extern "C" STATUS drvCaenV965Wait(int
+board);</span><br style="font-weight: bold;">
+<span style="font-weight: bold;">long drvCaenV965Device::wait();<br>
+</span>&nbsp;Wait for an interrupt after a gate.&nbsp; A process can
+then use the getValue() function to process incoming data.<br>
+Wait only returns after the state reaches the number of states
+initialized in <span style="font-family: monospace;">argument 6 of </span>caenV965Config().
+At that point you must either call revCaenV965SetState() or accept data
+on every gate.<br>
+<br style="font-weight: bold;">
+<span style="font-weight: bold;">int drvCaenV965Device:getValue( int
+signal, const char * parm , epicsInt32&nbsp; * value);<br>
+</span>Get a value.&nbsp; Signal number and parm are the same as is
+used by a record.<span style="font-weight: bold;"><br
+ style="font-weight: bold;">
+</span><br style="font-weight: bold;">
+<span style="font-weight: bold;">int drvCaenV965Device:putValue( int
+signal, const char * parm , epicsInt32&nbsp; value);</span><br
+ style="font-weight: bold;">
+Set a value.&nbsp; Signal number and parm are the same as is used by a
+record.<span style="font-weight: bold;"><br style="font-weight: bold;">
+</span><br>
+<span style="font-weight: bold;">drvCaenV965Device *
+drvCaenV965Device::getV965Handle(int card);</span><br>
+Get a pointer to a drvCaenV965Device object.<br
+ style="font-weight: bold;">
+<br>
+<h3>4. Implementation notes</h3>
+This driver is implemented in C++.&nbsp; The main class objects are
+listed below:<br>
+<table cellpadding="2" cellspacing="2" border="1"
+ style="text-align: left; width: 95%;">
+  <tbody>
+    <tr>
+      <th style="vertical-align: top;">Class<br>
+      </th>
+      <th style="vertical-align: top;">Declared in:<br>
+      </th>
+      <th style="vertical-align: top;">Implemented in:</th>
+      <th style="vertical-align: top;">Purpose<br>
+      </th>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">drvCaenV965DSet<br>
+      </td>
+      <td style="vertical-align: top;">drvV965.cc<br>
+      </td>
+      <td style="vertical-align: top;">drvV965.cc<br>
+      </td>
+      <td style="vertical-align: top;">Required for all EPICS Device
+Drivers</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">aidset,longindset,longoutdset</td>
+      <td style="vertical-align: top;">devV965.cc</td>
+      <td style="vertical-align: top;">devV965.cc</td>
+      <td style="vertical-align: top;">Required for all EPICS Device
+Support.&nbsp; These classes implement InitRecord(),GetIOIntInfo(), and
+read()/write() methods as static members.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">CaenD16, CaenD32<br>
+      </td>
+      <td style="vertical-align: top;">drvV965p.h<br>
+      </td>
+      <td style="vertical-align: top;">drvV965p.h<br>
+      </td>
+      <td style="vertical-align: top;">Wrapper classes for device
+registers.&nbsp; Overloaded operator int()&nbsp; and operator=()
+enforce the use of sysInXXX() and sysOutXXX() calls to do actual board
+IO.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">drvCaenV965Registers<br>
+      </td>
+      <td style="vertical-align: top;">drvV965p.h<br>
+      </td>
+      <td style="vertical-align: top;">drvV965p.h<br>
+      </td>
+      <td style="vertical-align: top;">Wrapper class for the
+board.&nbsp; All methods must be static and the constructor must be
+private.&nbsp; Access to the board's registers are by name ant through
+this class.&nbsp; The boards physical address in memory space is cast
+as this type.<br>
+      </td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;">drvCaenV965Device<br>
+      </td>
+      <td style="vertical-align: top;">drvV965.h<br>
+      </td>
+      <td style="vertical-align: top;">drvV965.cc<br>
+      </td>
+      <td style="vertical-align: top;">Driver support data for the
+driver.&nbsp; Keeps stored state, the board address, and data recorded
+during the ISR.&nbsp;&nbsp; Methods required to support the device
+support layer are implemented here.&nbsp; A static member array of up
+to 20 pointers to drvCaenV965Device objects is used to store
+information about all configured boards.<br>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+Our SNS application required that we take three samples in rapid
+succession.&nbsp; We dont need the data on all three samples for all
+channels, sample 1 has part of the data and sample 2 has part of the
+data. We used sample 0 to set thesholds.<br>
+<br>
+<br>
+</div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+#==============================================================
+#
+#  Abs:  EPICS Database definitions for the
+#        BiRa VME-7305 (VSAM)
+#
+#  Name: devVSAM.dbd
+#
+#  Facility:  LBL
+#
+#  Auth: dd-mmm-yyyy, Author's Name  (USERNAME)
+#  Rev:  dd-mmm-yyyy, First Lastname (USERNAME)
+#
+#--------------------------------------------------------------
+#  Mod:
+#       dd-mmm-yyyy, First Lastname (USERNAME):
+#         comments
+#
+#==============================================================
+#
+# BiRa VME-7305 (VSAM) Device Support
+device(ai,VME_IO,devAiVSAM,"VSAM")
+device(bi,VME_IO,devBiVSAM,"VSAM")
+device(bo,VME_IO,devBoVSAM,"VSAM")
+
+#  BiRa VME-7305 (VSAM) Driver Support
+driver(drvVSAM)
+

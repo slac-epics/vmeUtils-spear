@@ -1,0 +1,38 @@
+#==============================================================
+#
+#  Name: RELEASE_NOTES
+#
+#  Rem:  This files describes release notes for 
+#        the SPEAR vmeUtils epics module.   
+#
+#	vmeUtils contains the following non-asyn VME module support:
+#	* CaenADCV965_8 - Caen V965 QDC with 8  channels
+#	* caenADCV965   - Caen V965 QDC with 16 channels
+#	* drvSpearTimestamp - SPEAR Time Stamp Synchronization Module (TSSM)
+#	* gtr           - Generic Transient Recorder (Joerger, SIS digitizers)
+#	* iocMonLib     - Synergy PPC CPU Monitor
+#	* ssi           - Kramert SSI-Interface SSI 505F Encoder Counter
+#	* vmeCardRecord - General VME Module Interface
+#	* vsam          - VME Smart Analog Module
+#
+#--------------------------------------------------------------
+
+vmeUtils-Rx-x-x  M. Dunning 27-Jul-2017
+    This is vmeUtils-R0-0-1, built with base R3.15.5-1.0 from lcls
+    Commented out compiler #if/#endif statements for errlog.h in these files:
+            vsam/src/devCardVSAM.c
+            vsam/src/devAiVSAM.c
+            vsam/src/devAoVSAM.c
+            vsam/src/devBiVSAM.c
+            vsam/src/devBoVSAM.c
+
+vmeUtils-R0-0-1: 01/25/2013
+	* First draft of GTR sis3302 support (arming and voltage offset only).
+	* Add GTR AO support of voltage offset.
+vmeUtils-R0-0-0: 10/8/2012
+	* Caen and caen support from LCLS
+	* drvSpearTimestamp, iocMonLib from SPEAR
+	* gtr           R2-3
+	* ssi           R1-0-1
+	* vmeCardRecord R2-2-1
+	* vsam          R2-2-1

@@ -1,0 +1,13 @@
+record(ai,"$(ioc):SpearTimestamp") {
+	field(DESC, "Current Spear Timestamp")
+	field(DTYP, "Spear Timestamp")
+	field(PREC, "15")
+	field(EGU,  "4kHz Ticks")
+	field(LOPR, "0")
+	field(HOPR, "1E13")
+	field(AOFF,	"0")
+	field(ASLO, "0")
+	field(HYST, "0")
+	field(SCAN, "1 second")
+	field(TSE,  "-2")
+}

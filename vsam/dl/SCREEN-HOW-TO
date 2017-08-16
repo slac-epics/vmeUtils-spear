@@ -1,0 +1,6 @@
+To start the VSAM summary display, for each VSAM you must provide the
+same S and D parameters as in ../db/ioc_vsam0.tmpl:
+	dm vsam_summary.dl S=<sys>,D=<card>
+
+To invoke per the distributed ioc_vsam0.tmpl:
+	dm vsam_summary.dl S=ioc,D=0

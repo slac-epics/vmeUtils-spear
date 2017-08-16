@@ -1,0 +1,2 @@
+Till Straumann's <strauman@slac.stanford.edu> DMA support routines
+for VME cards running RTEMS with the VMEDMA API.

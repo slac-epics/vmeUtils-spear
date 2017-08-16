@@ -1,0 +1,15 @@
+#RELEASE Location of external products
+# Run "gnumake clean uninstall install" in the application
+# top directory each time this file is changed.
+#
+# NOTE: The build does not check dependancies on files
+# external to this application. Thus you should run
+# "gnumake clean uninstall install" in the top directory
+# each time EPICS_BASE, SNCSEQ, or any other external
+# module defined in the RELEASE file is rebuilt.
+
+#include $(TOP)/../../../configure/RELEASE-MODULES-master
+include $(TOP)/../../../RELEASE_SITE_3.15
+#include $(TOP)/../configure/RELEASE-MODULES-master
+#include $(TOP)/../../../configure/RELEASE-master
+EPICS_BASE=$(EPICS_SITE_TOP_SPEAR)/3.15.5epics/base

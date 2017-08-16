@@ -1,0 +1,22 @@
+## configure/RELEASE: Location of external products
+
+# Run "gnumake clean uninstall install" in the application top
+# directory whenever this file is changed or any external module
+# pointed to by this RELEASE file is rebuilt.
+
+# If you don't want to install files into $(TOP) then define
+# INSTALL_LOCATION_APP here:
+#INSTALL_LOCATION_APP=<fullpathname>
+
+# Define path to sequencer if needed
+#SNCSEQ=_SNCSEQ_
+
+# EPICS_BASE usually appears last so other apps can preempt definitions
+#EPICS_BASE=/usr/local/iocapps/R3.14.7/base/3-14-7-asd1
+
+#include $(TOP)/../../../configure/RELEASE-MODULES-master
+include $(TOP)/../../../RELEASE_SITE_3.15
+include $(TOP)/../configure/RELEASE-MODULES-master
+#include $(TOP)/../../../configure/RELEASE-master
+EPICS_BASE=$(EPICS_SITE_TOP_SPEAR)/3.15.5epics/base
+

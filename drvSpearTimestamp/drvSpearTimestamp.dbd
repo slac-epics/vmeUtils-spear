@@ -1,0 +1,4 @@
+include "devBusMapped.dbd"
+driver(drvSpearTimestamp)
+registrar(drvSpearTimestampRegistrar)
+device(ai,CONSTANT, devSpearTimestamp, "Spear Timestamp")

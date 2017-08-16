@@ -1,0 +1,47 @@
+#==============================================================
+#
+#  Name: RELEASE_NOTES
+#
+#  Rem: This files describes release notes for
+#       the Caen ADC V965 driver and device support.      
+#
+#  Auth: 01-Mar-2006  Author's Name      (DHT)
+#  Rev:  dd-mmm-yyyy, Reviewer's Name    (USERNAME)
+#--------------------------------------------------------------
+#  Mod:
+#        20-Mar-2010, S. Hoobler         (SONYA):
+#          release caenADCV965-R2-2-0:
+#        30-Apr-2009, K. Luchini         (LUCHINI):
+#          release caenADCV965-R2-0-0:
+#        08-Oct-2007, K. Luchini         (LUCHINI):
+#          release caenADCV965-R1-0-2
+#          release caenADCV965-R1-0-1
+#        17-Aug-2007, Doug Murray        (DRM):
+#          release caenADCV965-R1-0
+#
+#==============================================================
+#
+caenADCV965-R2-2-1:   Use $EPICS_BASE_VER macro in configure/RELEASE
+01/19/2012            Include epicsTypes.h in drvV965.h
+                      Build with base-R3-14-12
+
+caenADCV965-R2-2-0:   Build with base-R3-14-8-2-lcls6
+                      Build with rtems-4.9.4
+
+caenADCV965-R2-1-0:   Build with base-R3-14-8-2-lcls5
+                      Build with rtems-4.9.3
+
+caenADCV965-R2-0-0: Build with base-R3-14-8-2-lcls3 (RTEMS-4.9.1)
+
+caenADCV965-R1-0-1-1:
+	modifications needed to bring the module to EPICS R3-14-9 standard
+
+caenADCV965-R1-0-1: Build with base-R3-14-9-lcls1
+
+caenADCV965-R1-0-1: Build with base-R3-14-8-2-lcls2
+
+caenADCV965-R1-0:
+===============================================================
+Minor update - 8/17/2006 - Doug Murray
+Added basic OSI support for RTEMS, and A32 addressing option
+===============================================================

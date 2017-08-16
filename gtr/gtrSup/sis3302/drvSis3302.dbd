@@ -1,0 +1,2 @@
+registrar(drvSIS3302RegisterCommands)
+include "gtr.dbd"

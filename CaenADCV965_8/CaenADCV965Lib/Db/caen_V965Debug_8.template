@@ -1,0 +1,53 @@
+record( ai, "$(S)_$(SS):$(DEV):Q")
+        {
+        field( SCAN, "I/O Intr")
+        field( PINI, "YES")
+        field( DTYP, "CAEN V965_8")
+        field( INP, "#C0 S$(CHAN) @")
+        field( LINR, "NO CONVERSION")
+        }
+
+record( longin, "$(S)_$(SS):$(DEV):QH")
+        {
+        field( SCAN, "I/O Intr")
+        field( PINI, "YES")
+        field( DTYP, "CAEN V965_8")
+        field( INP, "#C0 S$(CHAN) @H")
+        }
+
+record( longin, "$(S)_$(SS):$(DEV):QL")
+        {
+        field( SCAN, "I/O Intr")
+        field( PINI, "YES")
+        field( DTYP, "CAEN V965_8")
+        field( INP, "#C0 S$(CHAN) @L")
+        }
+
+record( longin, "$(S)_$(SS):$(DEV):Status")
+        {
+        field( SCAN, "I/O Intr")
+        field( DTYP, "CAEN V965_8")
+        field( INP, "#C0 S$(CHAN) @S")
+        }
+
+record( longout, "$(S)_$(SS):$(DEV):ThresholdHiSet")
+        {
+        field( SCAN, "Passive")
+        field( EVNT, "99")
+        field( DTYP, "CAEN V965_8")
+        field( OUT, "#C0 S$(CHAN) @TH")
+        }
+
+record( longout, "$(S)_$(SS):$(DEV):ThresholdLoSet")
+        {
+        field( SCAN, "Passive")
+        field( EVNT, "99")
+        field( DTYP, "CAEN V965_8")
+        field( OUT, "#C0 S$(CHAN) @TL")
+        }
+record( longout, "$(S)_$(SS):$(DEV):HI_LO_Gain")
+        {
+        field( SCAN, "Passive")
+        field( DTYP, "CAEN V965_8")
+        field( OUT, "#C0 S$(CHAN) @G")
+        }

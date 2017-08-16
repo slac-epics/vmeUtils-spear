@@ -1,0 +1,128 @@
+# records to be loaded on a MASTER only
+record (bo, "Spear:Event1")
+{
+	field(DESC, "Spear TSSM Event 1")
+	field(DTYP, "BusAddress")
+	field(OUT,  "#C0 S0 @tssmMas+0x1c,tssmIO")
+	field(MASK, "0x0100")
+	field(VAL,  "0")
+	field(PINI, "YES")
+	field(ZNAM, "Inactive")
+	field(ONAM, "Active")
+	field(TSE,  "-2")
+	field(HIGH, "0.5")
+}
+record(calcout, "Spear:Event1Trig")
+{
+	field(DESC, "Ev. Trig. Cond.+Source")
+	field(OUT,  "Spear:Event1 PP")
+}
+record (bo, "Spear:Event2")
+{
+	field(DESC, "Spear TSSM Event 2")
+	field(DTYP, "BusAddress")
+	field(OUT,  "#C0 S0 @tssmMas+0x1c,tssmIO")
+	field(MASK, "0x0200")
+	field(VAL,  "0")
+	field(PINI, "YES")
+	field(ZNAM, "Inactive")
+	field(ONAM, "Active")
+	field(TSE,  "-2")
+	field(HIGH, "0.5")
+}
+record(calcout, "Spear:Event2Trig")
+{
+	field(DESC, "Ev. Trig. Cond.+Source")
+	field(OUT,  "Spear:Event2 PP")
+}
+record (bo, "Spear:Event3")
+{
+	field(DESC, "Spear TSSM Event 3")
+	field(DTYP, "BusAddress")
+	field(OUT,  "#C0 S0 @tssmMas+0x1c,tssmIO")
+	field(MASK, "0x0400")
+	field(VAL,  "0")
+	field(PINI, "YES")
+	field(ZNAM, "Inactive")
+	field(ONAM, "Active")
+	field(TSE,  "-2")
+	field(HIGH, "0.5")
+}
+record(calcout, "Spear:Event3Trig")
+{
+	field(DESC, "Ev. Trig. Cond.+Source")
+	field(OUT,  "Spear:Event3 PP")
+}
+record (bo, "Spear:Event4")
+{
+	field(DESC, "Spear TSSM Event 4")
+	field(DTYP, "BusAddress")
+	field(OUT,  "#C0 S0 @tssmMas+0x1c,tssmIO")
+	field(MASK, "0x0800")
+	field(VAL,  "0")
+	field(PINI, "YES")
+	field(ZNAM, "Inactive")
+	field(ONAM, "Active")
+	field(TSE,  "-2")
+	field(HIGH, "0.5")
+}
+record(calcout, "Spear:Event4Trig")
+{
+	field(DESC, "Ev. Trig. Cond.+Source")
+	field(OUT,  "Spear:Event4 PP")
+}
+record (bo, "Spear:Event5")
+{
+	field(DESC, "Spear TSSM Event 5")
+	field(DTYP, "BusAddress")
+	field(OUT,  "#C0 S0 @tssmMas+0x1c,tssmIO")
+	field(MASK, "0x1000")
+	field(VAL,  "0")
+	field(PINI, "YES")
+	field(ZNAM, "Inactive")
+	field(ONAM, "Active")
+	field(TSE,  "-2")
+	field(HIGH, "0.5")
+}
+record(calcout, "Spear:Event5Trig")
+{
+	field(DESC, "Ev. Trig. Cond.+Source")
+	field(OUT,  "Spear:Event5 PP")
+}
+record (bo, "Spear:Event6")
+{
+	field(DESC, "Spear TSSM Event 6")
+	field(DTYP, "BusAddress")
+	field(OUT,  "#C0 S0 @tssmMas+0x1c,tssmIO")
+	field(MASK, "0x2000")
+	field(VAL,  "0")
+	field(PINI, "YES")
+	field(ZNAM, "Inactive")
+	field(ONAM, "Active")
+	field(TSE,  "-2")
+	field(HIGH, "0.5")
+}
+record(calcout, "Spear:Event6Trig")
+{
+	field(DESC, "Ev. Trig. Cond.+Source")
+	field(OUT,  "Spear:Event6 PP")
+}
+record (bo, "Spear:Event7")
+{
+	field(DESC, "Spear TSSM Event 7")
+	field(DTYP, "BusAddress")
+	field(OUT,  "#C0 S0 @tssmMas+0x1c,tssmIO")
+	field(MASK, "0x4000")
+	field(VAL,  "0")
+	field(PINI, "YES")
+	field(ZNAM, "Inactive")
+	field(ONAM, "Active")
+	field(TSE,  "-2")
+	field(HIGH, "0.5")
+}
+record(calcout, "Spear:Event7Trig")
+{
+	field(DESC, "Ev. Trig. Cond.+Source")
+	field(OUT,  "Spear:Event7 PP")
+}
+

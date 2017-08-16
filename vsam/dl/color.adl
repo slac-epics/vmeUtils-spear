@@ -1,0 +1,3981 @@
+file {
+	name="color.dl"
+}
+display {
+	magic="305419896"
+	majv="2"
+	mnrv="4"
+	ndyng="0"
+	npc="1"
+	nstr="126"
+	ndynamic="0"
+	nplot="0"
+	nrd="0"
+	nes="0"
+	nkd="0"
+	npd="0"
+	npo="0"
+	object {
+		x="0"
+		y="0"
+		width="700"
+		height="700"
+	}
+	clr="0"
+	bclr="10"
+	nwords_dspy="4542"
+	nwords_sta="580"
+	nwords_cmap="128"
+	nwords_crules="2554"
+	odyng="4542"
+	osta="3962"
+	odynamic="4542"
+	oplot="4542"
+	ord="4542"
+	oes="4542"
+	okd="4542"
+	opd="4542"
+	opo="4542"
+	opc="68"
+	ostr="72"
+	ocmap="1280"
+	ocrules="1408"
+	style="solid"
+	fill="outline"
+	width="0"
+	clrmod="static"
+	vismod="static"
+	precision="-1"
+	clrrule="alarm"
+	pv=""
+	cmap=""
+	pixwid="1152"
+	pixht="900"
+	mmwid="325"
+	mmht="254"
+}
+"<<color map>>" {
+	ncolors="31"
+	dl_color {
+		r="255"
+		g="255"
+		b="255"
+		inten="255"
+		blink="off"
+	}
+	dl_color {
+		r="0"
+		g="0"
+		b="0"
+		inten="0"
+		blink="off"
+	}
+	dl_color {
+		r="255"
+		g="0"
+		b="0"
+		inten="0"
+		blink="off"
+	}
+	dl_color {
+		r="255"
+		g="0"
+		b="0"
+		inten="0"
+		blink="on"
+	}
+	dl_color {
+		r="255"
+		g="255"
+		b="0"
+		inten="105"
+		blink="off"
+	}
+	dl_color {
+		r="255"
+		g="255"
+		b="0"
+		inten="105"
+		blink="on"
+	}
+	dl_color {
+		r="0"
+		g="205"
+		b="102"
+		inten="190"
+		blink="off"
+	}
+	dl_color {
+		r="0"
+		g="0"
+		b="255"
+		inten="190"
+		blink="on"
+	}
+	dl_color {
+		r="105"
+		g="105"
+		b="105"
+		inten="105"
+		blink="off"
+	}
+	dl_color {
+		r="192"
+		g="192"
+		b="192"
+		inten="190"
+		blink="off"
+	}
+	dl_color {
+		r="225"
+		g="225"
+		b="225"
+		inten="225"
+		blink="off"
+	}
+	dl_color {
+		r="0"
+		g="0"
+		b="175"
+		inten="70"
+		blink="off"
+	}
+	dl_color {
+		r="0"
+		g="0"
+		b="255"
+		inten="105"
+		blink="off"
+	}
+	dl_color {
+		r="135"
+		g="206"
+		b="235"
+		inten="190"
+		blink="off"
+	}
+	dl_color {
+		r="0"
+		g="255"
+		b="255"
+		inten="225"
+		blink="off"
+	}
+	dl_color {
+		r="127"
+		g="255"
+		b="212"
+		inten="190"
+		blink="off"
+	}
+	dl_color {
+		r="0"
+		g="150"
+		b="0"
+		inten="190"
+		blink="off"
+	}
+	dl_color {
+		r="0"
+		g="255"
+		b="0"
+		inten="190"
+		blink="off"
+	}
+	dl_color {
+		r="255"
+		g="255"
+		b="149"
+		inten="190"
+		blink="off"
+	}
+	dl_color {
+		r="255"
+		g="165"
+		b="0"
+		inten="70"
+		blink="off"
+	}
+	dl_color {
+		r="245"
+		g="222"
+		b="210"
+		inten="220"
+		blink="off"
+	}
+	dl_color {
+		r="142"
+		g="35"
+		b="35"
+		inten="90"
+		blink="off"
+	}
+	dl_color {
+		r="245"
+		g="222"
+		b="179"
+		inten="170"
+		blink="off"
+	}
+	dl_color {
+		r="255"
+		g="140"
+		b="0"
+		inten="170"
+		blink="off"
+	}
+	dl_color {
+		r="255"
+		g="0"
+		b="0"
+		inten="0"
+		blink="off"
+	}
+	dl_color {
+		r="255"
+		g="105"
+		b="180"
+		inten="190"
+		blink="off"
+	}
+	dl_color {
+		r="255"
+		g="192"
+		b="203"
+		inten="220"
+		blink="off"
+	}
+	dl_color {
+		r="255"
+		g="0"
+		b="255"
+		inten="170"
+		blink="off"
+	}
+	dl_color {
+		r="238"
+		g="130"
+		b="238"
+		inten="190"
+		blink="off"
+	}
+	dl_color {
+		r="176"
+		g="48"
+		b="96"
+		inten="90"
+		blink="off"
+	}
+	dl_color {
+		r="160"
+		g="32"
+		b="240"
+		inten="105"
+		blink="off"
+	}
+}
+"<<color rules>>" {
+	nrules="25"
+	dl_color_rule {
+		name="alarm"
+		info[0] {
+			chan="$(STN):$(NAME).SEVR"
+			value="INVALID"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[1] {
+			chan="$(STN):$(NAME).SEVR"
+			value="MAJOR"
+			connector="use"
+			comparator="equals"
+			clr="2"
+		}
+		info[2] {
+			chan="$(STN):$(NAME).SEVR"
+			value="MINOR"
+			connector="use"
+			comparator="equals"
+			clr="4"
+		}
+		info[3] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[4] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[5] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="rf_ilck"
+		info[0] {
+			chan="$(STN):STNDCM:SUMY:MODU.SEVR"
+			value="1"
+			connector="use"
+			comparator="greater than"
+			clr="30"
+		}
+		info[1] {
+			chan="$(STN):$(MODULE):MODU.SEVR"
+			value="1"
+			connector="use"
+			comparator="greater than"
+			clr="30"
+		}
+		info[2] {
+			chan="$(STN):$(COMP):FRST.SEVR"
+			value="INVALID"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[3] {
+			chan="$(STN):$(COMP):LTCH.SEVR"
+			value="INVALID"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[4] {
+			chan="$(STN):$(COMP):FRST.SEVR"
+			value="0"
+			connector="and"
+			comparator="greater than"
+			clr="3"
+		}
+		info[5] {
+			chan="$(STN):$(COMP):LTCH.SEVR"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="3"
+		}
+		info[6] {
+			chan="$(STN):$(COMP):LTCH.SEVR"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="24"
+		}
+		info[7] {
+			chan="$(STN):$(NAME).SEVR"
+			value="INVALID"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[8] {
+			chan="$(STN):$(NAME).SEVR"
+			value="MAJOR"
+			connector="use"
+			comparator="equals"
+			clr="5"
+		}
+		info[9] {
+			chan="$(STN):$(NAME).SEVR"
+			value="MINOR"
+			connector="use"
+			comparator="equals"
+			clr="4"
+		}
+		info[10] {
+			chan="$(STN):$(NAME).SEVR"
+			value="NO_ALARM"
+			connector="use"
+			comparator="equals"
+			clr="6"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="rf_ilck_led"
+		info[0] {
+			chan="$(STN):STNDCM:SUMY:MODU.SEVR"
+			value="1"
+			connector="use"
+			comparator="greater than"
+			clr="30"
+		}
+		info[1] {
+			chan="$(STN):$(MODULE):MODU.SEVR"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="30"
+		}
+		info[2] {
+			chan="$(STN):$(COMP):FRST.SEVR"
+			value="INVALID"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[3] {
+			chan="$(STN):$(COMP):LTCH.SEVR"
+			value="INVALID"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[4] {
+			chan="$(STN):$(COMP):FRST.SEVR"
+			value="0"
+			connector="and"
+			comparator="greater than"
+			clr="3"
+		}
+		info[5] {
+			chan="$(STN):$(COMP):LTCH.SEVR"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="3"
+		}
+		info[6] {
+			chan="$(STN):$(COMP):LTCH.SEVR"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="2"
+		}
+		info[7] {
+			chan="$(STN):$(COMP):LTCH.SEVR"
+			value="0"
+			connector="use"
+			comparator="equals"
+			clr="10"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="rf_ilck_border"
+		info[0] {
+			chan="$(STN):STNDCM:SUMY:MODU.SEVR"
+			value="1"
+			connector="use"
+			comparator="greater than"
+			clr="1"
+		}
+		info[1] {
+			chan="$(STN):$(MODULE):MODU.SEVR"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="1"
+		}
+		info[2] {
+			chan="$(STN):$(COMP):FRST.SEVR"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="1"
+		}
+		info[3] {
+			chan="$(STN):$(COMP):LTCH.SEVR"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="1"
+		}
+		info[4] {
+			chan="$(STN):$(COMP):LTCH.SEVR"
+			value="0"
+			connector="use"
+			comparator="equals"
+			clr="10"
+		}
+		info[5] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="rf_module"
+		info[0] {
+			chan="$(STN):STNDCM:SUMY:MODU.SEVR"
+			value="1"
+			connector="use"
+			comparator="greater than"
+			clr="30"
+		}
+		info[1] {
+			chan="$(STN):$(COMP):MODU.SEVR"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="30"
+		}
+		info[2] {
+			chan="$(STN):$(COMP):MODU.SEVR"
+			value="0"
+			connector="use"
+			comparator="equals"
+			clr="6"
+		}
+		info[3] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[4] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[5] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="rf_alarm"
+		info[0] {
+			chan="$(STN):$(DCM)DCM:SUMY:MODU.SEVR"
+			value="1"
+			connector="use"
+			comparator="greater than"
+			clr="30"
+		}
+		info[1] {
+			chan="$(STN):$(MODULE):MODU.SEVR"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="30"
+		}
+		info[2] {
+			chan="$(STN):$(NAME).SEVR"
+			value="INVALID"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[3] {
+			chan="$(STN):$(NAME).SEVR"
+			value="MAJOR"
+			connector="use"
+			comparator="equals"
+			clr="2"
+		}
+		info[4] {
+			chan="$(STN):$(NAME).SEVR"
+			value="MINOR"
+			connector="use"
+			comparator="equals"
+			clr="4"
+		}
+		info[5] {
+			chan="$(STN):$(NAME).SEVR"
+			value="NO_ALARM"
+			connector="use"
+			comparator="equals"
+			clr="6"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="rf_alarm_blink"
+		info[0] {
+			chan="$(STN):$(DCM)DCM:SUMY:MODU.SEVR"
+			value="1"
+			connector="use"
+			comparator="greater than"
+			clr="30"
+		}
+		info[1] {
+			chan="$(STN):$(MODULE):MODU.SEVR"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="30"
+		}
+		info[2] {
+			chan="$(STN):$(NAME).SEVR"
+			value="INVALID"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[3] {
+			chan="$(STN):$(NAME).SEVR"
+			value="MAJOR"
+			connector="use"
+			comparator="equals"
+			clr="5"
+		}
+		info[4] {
+			chan="$(STN):$(NAME).SEVR"
+			value="MINOR"
+			connector="use"
+			comparator="equals"
+			clr="4"
+		}
+		info[5] {
+			chan="$(STN):$(NAME).SEVR"
+			value="NO_ALARM"
+			connector="use"
+			comparator="equals"
+			clr="6"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="ric_alarm"
+		info[0] {
+			chan="$(C).SEVR"
+			value="MAJOR"
+			connector="use"
+			comparator="equals"
+			clr="2"
+		}
+		info[1] {
+			chan="$(C).SEVR"
+			value="MINOR"
+			connector="use"
+			comparator="equals"
+			clr="4"
+		}
+		info[2] {
+			chan="$(C).SEVR"
+			value="INFO"
+			connector="use"
+			comparator="equals"
+			clr="6"
+		}
+		info[3] {
+			chan="$(C).SEVR"
+			value="INVALID"
+			connector="use"
+			comparator="equals"
+			clr="27"
+		}
+		info[4] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[5] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="LEDs"
+		info[0] {
+			chan="$(C)"
+			value="0"
+			connector="use"
+			comparator="equals"
+			clr="2"
+		}
+		info[1] {
+			chan="$(C)"
+			value="1"
+			connector="use"
+			comparator="equals"
+			clr="17"
+		}
+		info[2] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[3] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[4] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[5] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="Red"
+		info[0] {
+			chan="$(C)"
+			value="0"
+			connector="use"
+			comparator="less than"
+			clr="22"
+		}
+		info[1] {
+			chan="$(C)"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="24"
+		}
+		info[2] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[3] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[4] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[5] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="lfb_alarm"
+		info[0] {
+			chan="$(C).SEVR"
+			value="MAJOR"
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[1] {
+			chan="$(C).ACK"
+			value="YES"
+			connector="use"
+			comparator="equals"
+			clr="3"
+		}
+		info[2] {
+			chan="$(C).SEVR"
+			value="MAJOR"
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[3] {
+			chan="$(C).ACK"
+			value="NO"
+			connector="use"
+			comparator="equals"
+			clr="2"
+		}
+		info[4] {
+			chan="$(C).SEVR"
+			value="MINOR"
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[5] {
+			chan="$(C).ACK"
+			value="YES"
+			connector="use"
+			comparator="equals"
+			clr="5"
+		}
+		info[6] {
+			chan="$(C).SEVR"
+			value="MINOR"
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[7] {
+			chan="$(C).ACK"
+			value="NO"
+			connector="use"
+			comparator="equals"
+			clr="4"
+		}
+		info[8] {
+			chan="$(C).SEVR"
+			value="INFO"
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[9] {
+			chan="$(C).ACK"
+			value="YES"
+			connector="use"
+			comparator="equals"
+			clr="7"
+		}
+		info[10] {
+			chan="$(C).SEVR"
+			value="INFO"
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[11] {
+			chan="$(C).ACK"
+			value="NO"
+			connector="use"
+			comparator="equals"
+			clr="12"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="on"
+		bg_enable="on"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="lfb_Gradient"
+		info[0] {
+			chan="$(C).VAL"
+			value="1"
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[1] {
+			chan="$(C).VAL"
+			value="2"
+			connector="use"
+			comparator="less than"
+			clr="2"
+		}
+		info[2] {
+			chan="$(C).VAL"
+			value="4"
+			connector="use"
+			comparator="less than"
+			clr="28"
+		}
+		info[3] {
+			chan="$(C).VAL"
+			value="8"
+			connector="use"
+			comparator="less than"
+			clr="26"
+		}
+		info[4] {
+			chan="$(C).VAL"
+			value="16"
+			connector="use"
+			comparator="less than"
+			clr="25"
+		}
+		info[5] {
+			chan="$(C).VAL"
+			value="32"
+			connector="use"
+			comparator="less than"
+			clr="19"
+		}
+		info[6] {
+			chan="$(C).VAL"
+			value="64"
+			connector="use"
+			comparator="less than"
+			clr="23"
+		}
+		info[7] {
+			chan="$(C).VAL"
+			value="128"
+			connector="use"
+			comparator="less than"
+			clr="4"
+		}
+		info[8] {
+			chan="$(C).VAL"
+			value="256"
+			connector="use"
+			comparator="less than"
+			clr="17"
+		}
+		info[9] {
+			chan="$(C).VAL"
+			value="512"
+			connector="use"
+			comparator="less than"
+			clr="6"
+		}
+		info[10] {
+			chan="$(C).VAL"
+			value="1024"
+			connector="use"
+			comparator="less than"
+			clr="15"
+		}
+		info[11] {
+			chan="$(C).VAL"
+			value="2048"
+			connector="use"
+			comparator="less than"
+			clr="14"
+		}
+		info[12] {
+			chan="$(C).VAL"
+			value="4096"
+			connector="use"
+			comparator="less than"
+			clr="13"
+		}
+		info[13] {
+			chan="$(C).VAL"
+			value="8192"
+			connector="use"
+			comparator="less than"
+			clr="12"
+		}
+		info[14] {
+			chan="$(C).VAL"
+			value="16384"
+			connector="use"
+			comparator="less than"
+			clr="11"
+		}
+		info[15] {
+			chan="$(C).VAL"
+			value="4294967295"
+			connector="use"
+			comparator="less than"
+			clr="3"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="lfb_Mode"
+		info[0] {
+			chan="$(C)"
+			value="0"
+			connector="use"
+			comparator="equals"
+			clr="6"
+		}
+		info[1] {
+			chan="$(C)"
+			value="1"
+			connector="use"
+			comparator="equals"
+			clr="23"
+		}
+		info[2] {
+			chan="$(C)"
+			value="2"
+			connector="use"
+			comparator="equals"
+			clr="4"
+		}
+		info[3] {
+			chan="$(C)"
+			value="3"
+			connector="use"
+			comparator="equals"
+			clr="2"
+		}
+		info[4] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[5] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="lfb_LEDs_summ"
+		info[0] {
+			chan="$(C).VAL"
+			value="0"
+			connector="use"
+			comparator="equals"
+			clr="10"
+		}
+		info[1] {
+			chan="$(C).VAL"
+			value="21"
+			connector="use"
+			comparator="less than"
+			clr="6"
+		}
+		info[2] {
+			chan="$(C).VAL"
+			value="20"
+			connector="use"
+			comparator="greater than"
+			clr="2"
+		}
+		info[3] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[4] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[5] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="lfb_Gradient_summ"
+		info[0] {
+			chan="$(C).VAL"
+			value="1"
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[1] {
+			chan="$(C).VAL"
+			value="40"
+			connector="use"
+			comparator="less than"
+			clr="2"
+		}
+		info[2] {
+			chan="$(C).VAL"
+			value="80"
+			connector="use"
+			comparator="less than"
+			clr="28"
+		}
+		info[3] {
+			chan="$(C).VAL"
+			value="160"
+			connector="use"
+			comparator="less than"
+			clr="26"
+		}
+		info[4] {
+			chan="$(C).VAL"
+			value="320"
+			connector="use"
+			comparator="less than"
+			clr="25"
+		}
+		info[5] {
+			chan="$(C).VAL"
+			value="640"
+			connector="use"
+			comparator="less than"
+			clr="19"
+		}
+		info[6] {
+			chan="$(C).VAL"
+			value="1280"
+			connector="use"
+			comparator="less than"
+			clr="23"
+		}
+		info[7] {
+			chan="$(C).VAL"
+			value="2560"
+			connector="use"
+			comparator="less than"
+			clr="4"
+		}
+		info[8] {
+			chan="$(C).VAL"
+			value="5120"
+			connector="use"
+			comparator="less than"
+			clr="17"
+		}
+		info[9] {
+			chan="$(C).VAL"
+			value="10240"
+			connector="use"
+			comparator="less than"
+			clr="6"
+		}
+		info[10] {
+			chan="$(C).VAL"
+			value="20480"
+			connector="use"
+			comparator="less than"
+			clr="15"
+		}
+		info[11] {
+			chan="$(C).VAL"
+			value="40960"
+			connector="use"
+			comparator="less than"
+			clr="14"
+		}
+		info[12] {
+			chan="$(C).VAL"
+			value="81920"
+			connector="use"
+			comparator="less than"
+			clr="13"
+		}
+		info[13] {
+			chan="$(C).VAL"
+			value="163840"
+			connector="use"
+			comparator="less than"
+			clr="12"
+		}
+		info[14] {
+			chan="$(C).VAL"
+			value="327680"
+			connector="use"
+			comparator="less than"
+			clr="11"
+		}
+		info[15] {
+			chan="$(C).VAL"
+			value="4294967295"
+			connector="use"
+			comparator="less than"
+			clr="7"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="lfb_TriStateLED"
+		info[0] {
+			chan="$(C).VAL"
+			value="0"
+			connector="use"
+			comparator="equals"
+			clr="10"
+		}
+		info[1] {
+			chan="$(C).VAL"
+			value="1"
+			connector="use"
+			comparator="equals"
+			clr="6"
+		}
+		info[2] {
+			chan="$(C).VAL"
+			value="2"
+			connector="use"
+			comparator="equals"
+			clr="2"
+		}
+		info[3] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[4] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[5] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="lfb_yellow_LEDs"
+		info[0] {
+			chan="$(C).VAL"
+			value="0"
+			connector="use"
+			comparator="equals"
+			clr="2"
+		}
+		info[1] {
+			chan="$(C).VAL"
+			value="1"
+			connector="use"
+			comparator="equals"
+			clr="4"
+		}
+		info[2] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[3] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[4] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[5] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="lfb_Grad_for_temp"
+		info[0] {
+			chan="$(C).VAL"
+			value="30"
+			connector="use"
+			comparator="less than"
+			clr="12"
+		}
+		info[1] {
+			chan="$(C).VAL"
+			value="35"
+			connector="use"
+			comparator="less than"
+			clr="14"
+		}
+		info[2] {
+			chan="$(C).VAL"
+			value="40"
+			connector="use"
+			comparator="less than"
+			clr="13"
+		}
+		info[3] {
+			chan="$(C).VAL"
+			value="43"
+			connector="use"
+			comparator="less than"
+			clr="17"
+		}
+		info[4] {
+			chan="$(C).VAL"
+			value="48"
+			connector="use"
+			comparator="less than"
+			clr="4"
+		}
+		info[5] {
+			chan="$(C).VAL"
+			value="50"
+			connector="use"
+			comparator="less than"
+			clr="2"
+		}
+		info[6] {
+			chan="$(C).VAL"
+			value="53"
+			connector="use"
+			comparator="less than"
+			clr="23"
+		}
+		info[7] {
+			chan="$(C).VAL"
+			value="55"
+			connector="use"
+			comparator="less than"
+			clr="25"
+		}
+		info[8] {
+			chan="$(C).VAL"
+			value="54"
+			connector="use"
+			comparator="less than"
+			clr="28"
+		}
+		info[9] {
+			chan="$(C).VAL"
+			value="58"
+			connector="use"
+			comparator="less than"
+			clr="5"
+		}
+		info[10] {
+			chan="$(C).VAL"
+			value="60"
+			connector="use"
+			comparator="greater than"
+			clr="3"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="lfb_grey_out"
+		info[0] {
+			chan="$(C).VAL"
+			value="0"
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[1] {
+			chan="$(C).VAL"
+			value="1"
+			connector="use"
+			comparator="equals"
+			clr="6"
+		}
+		info[2] {
+			chan="$(C).VAL"
+			value="2"
+			connector="use"
+			comparator="equals"
+			clr="6"
+		}
+		info[3] {
+			chan="$(C).VAL"
+			value="3"
+			connector="use"
+			comparator="equals"
+			clr="1"
+		}
+		info[4] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[5] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="9"
+	}
+	dl_color_rule {
+		name="lfb_Grad_for_age"
+		info[0] {
+			chan="$(C).VAL"
+			value="1"
+			connector="use"
+			comparator="less than"
+			clr="6"
+		}
+		info[1] {
+			chan="$(C).VAL"
+			value="2"
+			connector="use"
+			comparator="less than"
+			clr="6"
+		}
+		info[2] {
+			chan="$(C).VAL"
+			value="3"
+			connector="use"
+			comparator="less than"
+			clr="17"
+		}
+		info[3] {
+			chan="$(C).VAL"
+			value="4"
+			connector="use"
+			comparator="less than"
+			clr="15"
+		}
+		info[4] {
+			chan="$(C).VAL"
+			value="5"
+			connector="use"
+			comparator="less than"
+			clr="4"
+		}
+		info[5] {
+			chan="$(C).VAL"
+			value="6"
+			connector="use"
+			comparator="less than"
+			clr="4"
+		}
+		info[6] {
+			chan="$(C).VAL"
+			value="7"
+			connector="use"
+			comparator="less than"
+			clr="26"
+		}
+		info[7] {
+			chan="$(C).VAL"
+			value="8"
+			connector="use"
+			comparator="less than"
+			clr="19"
+		}
+		info[8] {
+			chan="$(C).VAL"
+			value="9"
+			connector="use"
+			comparator="less than"
+			clr="23"
+		}
+		info[9] {
+			chan="$(C).VAL"
+			value="9"
+			connector="use"
+			comparator="equals"
+			clr="2"
+		}
+		info[10] {
+			chan="$(C).VAL"
+			value="9"
+			connector="use"
+			comparator="greater than"
+			clr="2"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="pepii"
+		info[0] {
+			chan="$(STN):$(NAME).CLR"
+			value="MAGENTA"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[1] {
+			chan="$(STN):$(NAME).CLR"
+			value="CYAN"
+			connector="use"
+			comparator="equals"
+			clr="14"
+		}
+		info[2] {
+			chan="$(STN):$(NAME).CLR"
+			value="RED"
+			connector="use"
+			comparator="equals"
+			clr="2"
+		}
+		info[3] {
+			chan="$(STN):$(NAME).CLR"
+			value="YELLOW"
+			connector="use"
+			comparator="equals"
+			clr="4"
+		}
+		info[4] {
+			chan="$(STN):$(NAME).CLR"
+			value="BLUE"
+			connector="use"
+			comparator="equals"
+			clr="12"
+		}
+		info[5] {
+			chan="$(STN):$(NAME).CLR"
+			value="GREEN"
+			connector="use"
+			comparator="equals"
+			clr="6"
+		}
+		info[6] {
+			chan="$(STN):$(NAME).CLR"
+			value="WHITE"
+			connector="use"
+			comparator="equals"
+			clr="0"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="gms_alarm"
+		info[0] {
+			chan="$(NAME):SUMY:ALM.SEVR"
+			value="3"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[1] {
+			chan="$(NAME):SUMY:ALM.SEVR"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="3"
+		}
+		info[2] {
+			chan="$(NAME):SUMY:WARN.SEVR"
+			value="3"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[3] {
+			chan="$(NAME):SUMY:WARN.SEVR"
+			value="0"
+			connector="use"
+			comparator="greater than"
+			clr="4"
+		}
+		info[4] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[5] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="BIC_color"
+		info[0] {
+			chan="$(STN):RING.SEVR"
+			value="NO_ALARM"
+			connector="use"
+			comparator="equals"
+			clr="6"
+		}
+		info[1] {
+			chan="$(STN):RING.SEVR"
+			value="MAJOR"
+			connector="use"
+			comparator="equals"
+			clr="2"
+		}
+		info[2] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[3] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[4] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[5] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="drrf_status"
+		info[0] {
+			chan="$(STN):STN:DCM:MODU.SEVR"
+			value="1"
+			connector="use"
+			comparator="greater than"
+			clr="30"
+		}
+		info[1] {
+			chan="$(STN):STN:DCM:MODU.SEVR"
+			value="INVALID"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[2] {
+			chan="$(STN):$(NAME).SEVR"
+			value="INVALID"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[3] {
+			chan="$(STN):$(NAME).SEVR"
+			value="MAJOR"
+			connector="use"
+			comparator="equals"
+			clr="2"
+		}
+		info[4] {
+			chan="$(STN):$(NAME).SEVR"
+			value="MINOR"
+			connector="use"
+			comparator="equals"
+			clr="4"
+		}
+		info[5] {
+			chan="$(STN):$(NAME).SEVR"
+			value="NO_ALARM"
+			connector="use"
+			comparator="equals"
+			clr="6"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+	dl_color_rule {
+		name="drrf_alarm"
+		info[0] {
+			chan="$(STN):STN:DCM:MODU.SEVR"
+			value="1"
+			connector="use"
+			comparator="greater than"
+			clr="30"
+		}
+		info[1] {
+			chan="$(STN):STN:DCM:MODU.SEVR"
+			value="INVALID"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[2] {
+			chan="$(STN):$(NAME).SEVR"
+			value="INVALID"
+			connector="use"
+			comparator="equals"
+			clr="30"
+		}
+		info[3] {
+			chan="$(STN):$(NAME).SEVR"
+			value="MAJOR"
+			connector="use"
+			comparator="equals"
+			clr="3"
+		}
+		info[4] {
+			chan="$(STN):$(NAME).SEVR"
+			value="MINOR"
+			connector="use"
+			comparator="equals"
+			clr="4"
+		}
+		info[5] {
+			chan="$(STN):$(NAME).SEVR"
+			value="NO_ALARM"
+			connector="use"
+			comparator="equals"
+			clr="6"
+		}
+		info[6] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[7] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[8] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[9] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[10] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[11] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[12] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[13] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[14] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		info[15] {
+			chan=""
+			value=""
+			connector="use"
+			comparator="less than"
+			clr="1"
+		}
+		fg_enable="off"
+		bg_enable="off"
+		default_fg="0"
+		default_bg="1"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="22"
+		y="6"
+		width="426"
+		height="50"
+		groupid="0"
+	}
+	textix="color.dl"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="0"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="355"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="355"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= channel not connected or display error"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="295"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="300"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= informative text or graphic (static)"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="3"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="85"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="90"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= first signal to latch"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="2"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="115"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="120"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= latched signal or major alarm"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="5"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="145"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="150"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= signal will trip VERY soon"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="4"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="175"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="180"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= signal will trip soon or minor alarm"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="6"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="205"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="210"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= signal is good"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="8"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="420"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="425"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= used in 3D border"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="9"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="450"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="450"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= used for shading (static)"
+	align="horiz. left"
+}
+"oval" {
+	object {
+		x="10"
+		y="325"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="330"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= background color on all displays"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="20"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="11"
+		y="390"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="395"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= area for user entry or push button"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="30"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="55"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="60"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= invalid - HW, SW, or DB error"
+	align="horiz. left"
+}
+"text" {
+	object {
+		x="39"
+		y="370"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= display title"
+	align="horiz. left"
+}
+"oval" {
+	object {
+		x="10"
+		y="390"
+		width="22"
+		height="25"
+		groupid="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="465"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= text in push button/user entry area"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="12"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="510"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="515"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= Longitudinal Feedback (LFB)"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="29"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="480"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="485"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= RF system"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="13"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="11"
+		y="540"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="545"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= Bunch Injection Control (BIC)"
+	align="horiz. left"
+}
+"oval" {
+	object {
+		x="10"
+		y="540"
+		width="22"
+		height="25"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="7"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="570"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="575"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= Longitudinal Feedback Info"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="11"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="600"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="605"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= BaBar"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="12"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="235"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="240"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= signal is good (SLC)"
+	align="horiz. left"
+}
+"<<basic attribute>>" {
+	attr {
+		clr="14"
+		style="solid"
+		fill="solid"
+		width="0"
+	}
+}
+"oval" {
+	object {
+		x="10"
+		y="265"
+		width="21"
+		height="24"
+		groupid="0"
+	}
+}
+"<<basic attribute>>" {
+	attr {
+		clr="1"
+		style="solid"
+		fill="outline"
+		width="0"
+	}
+}
+"text" {
+	object {
+		x="39"
+		y="270"
+		width="300"
+		height="12"
+		groupid="0"
+	}
+	textix="= offline or disabled (SLC)"
+	align="horiz. left"
+}

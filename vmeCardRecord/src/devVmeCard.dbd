@@ -1,0 +1,7 @@
+#-- VME Card
+include "vmeCardRecord.dbd"
+device( vmeCard, VME_IO, devCardL1176,   "VME L1176")
+device( vmeCard, VME_IO, devCardVmi4100, "VME VMIC-4100")
+device( vmeCard, VME_IO, devCardVmi2534, "VME VMIC-2534")
+device( vmeCard, VME_IO, devCardVSAM,    "VSAM")
+
