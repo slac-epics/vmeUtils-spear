@@ -16,6 +16,10 @@
 #	* vsam          - VME Smart Analog Module
 #
 #--------------------------------------------------------------
+R0.0.1-0.0.2   S. Condamoor 29-May-2018
+    Build with base R3.15.5-1.0.13
+	  -  Build with MISCUTILS_SPEAR_MODULE_VERSION=R0.0.0-0.0.2
+	
 R0.0.1-0.0.1   S. Condamoor 28-Feb-2018
     Build with MISCUTILS_SPEAR_MODULE_VERSION=R0.0.0-0.0.1
 	
