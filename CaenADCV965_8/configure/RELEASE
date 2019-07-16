@@ -8,6 +8,9 @@
 # each time EPICS_BASE, SNCSEQ, or any other external
 # module defined in the RELEASE file is rebuilt.
 
+include $(TOP)/../../../RELEASE_SITE_3.15.5-1.1
+EPICS_BASE=$(EPICS_SITE_TOP_SPEAR)/3.15.5-1.1epics/base
+
 TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 
 # If you don't want to install into $(TOP) then
@@ -19,8 +22,8 @@ TEMPLATE_TOP=$(EPICS_BASE)/templates/makeBaseApp/top
 
 # EPICS_BASE usually appears last so other apps can override stuff:
 #include $(TOP)/../../../configure/RELEASE-MODULES-master
-include $(TOP)/../../../RELEASE_SITE_3.15
+#include $(TOP)/../../../RELEASE_SITE_3.15
 #include $(TOP)/../configure/RELEASE-MODULES-master
 #include $(TOP)/../../../configure/RELEASE-master
-EPICS_BASE=$(EPICS_SITE_TOP_SPEAR)/3.15.5epics/base
+# EPICS_BASE=$(EPICS_SITE_TOP_SPEAR)/3.15.5epics/base
 
