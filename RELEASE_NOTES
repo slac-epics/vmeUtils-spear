@@ -16,10 +16,12 @@
 #	* vsam          - VME Smart Analog Module
 #
 #--------------------------------------------------------------
+R0.0.1-0.0.4   S. Condamoor 15-Jul-2019
+	  -  Remove gtr from building here. Apps should use TID's version.
+	  
 R0.0.1-0.0.3   S. Condamoor 15-Jul-2019
     Build with base R3.15.5-1.1
 	  -  Build with MISCUTILS_SPEAR_MODULE_VERSION=R0.0.0-0.0.3
-	  -  Remove gtr from building here. Apps should use TID's version.
 
 R0.0.1-0.0.2   S. Condamoor 29-May-2018
     Build with base R3.15.5-1.0.13
