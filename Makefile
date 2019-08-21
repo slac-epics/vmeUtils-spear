@@ -11,7 +11,7 @@ TOP = .
 include $(TOP)/configure/CONFIG
 
 DIRS += drvSpearTimestamp
-#DIRS += gtr
+DIRS += gtr
 DIRS += gtr/drvUniverseDmaSup
 DIRS += iocMonLib
 DIRS += caenADCV965

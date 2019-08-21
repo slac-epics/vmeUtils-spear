@@ -1,4 +1,4 @@
 #RELEASE Location of external products
 
 #MISCUTILS=$(EPICS_MODULES_TOP)/miscUtils/miscUtils-R0-0-0
-MISCUTILS=$(EPICS_SITE_TOP_SPEAR)/epics/modules/miscUtils/miscUtils-spear-git
+MISCUTILS=$(EPICS_SITE_TOP_SPEAR)/epics/modules/miscUtils/$(MISCUTILS_SPEAR_MODULE_VERSION)

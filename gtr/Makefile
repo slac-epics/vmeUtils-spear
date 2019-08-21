@@ -7,10 +7,10 @@ TOP = .
 include $(TOP)/configure/CONFIG
 
 DIRS := configure
-#DIRS += $(wildcard *[Ss]up)
+DIRS += $(wildcard *[Ss]up)
 DIRS += gtrSup
-#DIRS += $(wildcard *[Aa]pp)
-#DIRS += testGtrApp
+DIRS += $(wildcard *[Aa]pp)
+DIRS += testGtrApp
 DIRS += $(wildcard ioc[Bb]oot)
 
 include $(TOP)/configure/RULES_TOP
