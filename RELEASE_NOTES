@@ -20,7 +20,7 @@ R0.0.1-0.0.5   S. Condamoor 20-Aug-2019
 	  -  Found that TID version of gtr does not include several changes made
 	     for device support for sisfadc which are critical changes.
 		 So falling back to SPEAR version of gtr.
-		 Re-include all modules in the Makefile that were excluded before.
+		 Re-include all
 	  
 R0.0.1-0.0.4   S. Condamoor 15-Jul-2019
 	  -  Remove gtr from building here. Apps should use TID's version.
