@@ -9,9 +9,10 @@
 #include $(TOP)/../../../configure/RELEASE-master
 #EPICS_BASE=$(EPICS_SITE_TOP_SPEAR)/3.15.5epics/base
 
-include $(TOP)/../../../RELEASE_SITE_3.15.5-1.1
-include $(TOP)/../configure/RELEASE-MODULES-master
-EPICS_BASE=$(EPICS_SITE_TOP_SPEAR)/3.15.5-1.1epics/base
+include $(TOP)/../../../RELEASE_SITE_7.0.3.1-1.0
+-include $(TOP)/../configure/RELEASE-MODULES-master
+#EPICS_BASE=$(EPICS_SITE_TOP_SPEAR)/3.15.5-1.1epics/base
+EPICS_BASE=$(BASE_SITE_TOP)/$(BASE_MODULE_VERSION)
 
 # If you don't want to install into $(TOP) then
 # define INSTALL_LOCATION_APP here
