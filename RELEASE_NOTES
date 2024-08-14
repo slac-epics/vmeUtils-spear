@@ -16,6 +16,10 @@
 #	* vsam          - VME Smart Analog Module
 #
 #--------------------------------------------------------------
+
+R1.0.0   S. Condamoor 14-Aug-2024
+	  - Build with base 7.0.3.1-1.0
+
 R0.0.1-0.0.5   S. Condamoor 20-Aug-2019
 	  -  Found that TID version of gtr does not include several changes made
 	     for device support for sisfadc which are critical changes.
