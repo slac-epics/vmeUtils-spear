@@ -11,11 +11,11 @@ TARGET_CFLAGS += $(CFLAGS_$(OS_CLASS)) $(CFLAGS_$(T_A))
 
 INC += drvRTEMSDmaSup.h
 
-LIBRARY_RTEMS += drvRTEMSDmaSup
+LIBRARY_IOC_RTEMS_YES += drvRTEMSDmaSup
 
-SRCS_RTEMS += drvRTEMSDmaSup.c
-SRCS += $(SRCS_$(T_A))
+LIBRARY_RTEMS=$(LIBRARY_IOC_RTEMS_$(HAVE_RTEMS_VMEDMA))
 
+SRCS = drvRTEMSDmaSup.c
 
 include $(TOP)/configure/RULES
 #----------------------------------------

@@ -33,12 +33,7 @@
 #include "drvGtr.h"
 #include "drvVtr10012.h"
 
-#ifdef HAS_IOOPS_H
-#include <basicIoOps.h>
-#endif
-
 typedef unsigned int uint32;
-typedef unsigned short uint16;
 
 #define NSAM10012_8 0x400
 #define STATIC static
@@ -66,7 +61,7 @@ typedef unsigned short uint16;
 
 #define BUFLEN 2048
 
-int vtr10012Debug=0;
+int vtr10012Debug=2;
 
 typedef enum {vtrType10012,vtrType10012_8,vtrType8014,vtrType10014} vtrType;
 #define vtrNTypes vtrType10014 + 1
@@ -202,9 +197,6 @@ static int dmaRead(epicsDmaId dmaId,uint32 vmeaddr,uint32 *buffer,int len)
 
 static void writeRegister(vtrInfo *pvtrInfo, int offset,uint16 value)
 {
-#ifdef HAS_IOOPS_H
-    out_be16((volatile void*)(pvtrInfo->a16+offset), value);
-#else
     char *a16 = pvtrInfo->a16;
     uint16 *reg;
 
@@ -212,21 +204,16 @@ static void writeRegister(vtrInfo *pvtrInfo, int offset,uint16 value)
         printf("VTR %2.2x <- %4.4X\n", offset, value);
     reg = (uint16 *)(a16+offset);
     *reg = value;
-#endif
 }
 
 static uint16 readRegister(vtrInfo *pvtrInfo, int offset)
 {
-    uint16 value;
-#ifdef HAS_IOOPS_H
-    value = in_be16((volatile void*)(pvtrInfo->a16+offset));
-#else
     char *a16 = pvtrInfo->a16;
     uint16 *reg;
+    uint16 value;
 
     reg = (uint16 *)(a16+offset);
     value = *reg;
-#endif
     return(value);
 }
 
@@ -279,34 +266,18 @@ void vtr10012IH(void *arg)
     vtrInfo *pvtrInfo = (vtrInfo *)arg;
 
     if(isRebooting || (pvtrInfo->arm == armDisarm)) {
-#ifdef HAS_IOOPS_H
-        out_be16((volatile void*)(pvtrInfo->a16+DISARM),   1);
-        out_be16((volatile void*)(pvtrInfo->a16+RESETIRQ), 1);
-#else
-        writeRegister(pvtrInfo,DISARM,1);
-        writeRegister(pvtrInfo,RESETIRQ,1);
-#endif
+        writeRegister(pvtrInfo,DISARM,1); 
         return;
     }
     if(pvtrInfo->type!=vtrType10012_8) {
-#ifdef HAS_IOOPS_H
-        uint16 regCPTCC = in_be16((volatile void*)(pvtrInfo->a16+CPTCC));
-#else
         uint16 regCPTCC = readRegister(pvtrInfo,CPTCC);
-#endif
         if(pvtrInfo->arm == armPostTrigger) {
             if(regCPTCC < pvtrInfo->numberPTE) return;
         } else if(pvtrInfo->arm == armPrePostTrigger) {
             if(regCPTCC < pvtrInfo->numberEvents)  return;
         }
     }
-#ifdef HAS_IOOPS_H
-    out_be16((volatile void*)(pvtrInfo->a16+DISARM),   1);
-    out_be16((volatile void*)(pvtrInfo->a16+RESETIRQ), 1);
-#else
-    writeRegister(pvtrInfo,DISARM,1);
-    writeRegister(pvtrInfo,RESETIRQ,1);
-#endif    
+    writeRegister(pvtrInfo,DISARM,1); 
     if(pvtrInfo->usrIH) (*pvtrInfo->usrIH)(pvtrInfo->handlerPvt);
 }
 
@@ -499,15 +470,6 @@ STATIC void readContiguous(vtrInfo *pvtrInfo,
                     + ((char *)(pmemory) - pvtrInfo->memory)
                     + ind * sizeof(uint32);
                 bytesRemaining = (nmax-ind)*sizeof(uint32);
-#if defined(HAS_UNIVERSEDMA) || defined(HAS_RTEMSDMASUP)
-                /* universe DMA packets need 32byte alignment */
-                nbytes = VMEaddr - (VMEaddr & 0xffffffe0);
-                VMEaddr        -= nbytes;
-                bytesRemaining += nbytes;
-                bufOffset       = nbytes;
-#else 
-                bufOffset = 0;
-#endif
                 bytesMax = BUFLEN*sizeof(uint32);
                 nbytes = (bytesRemaining<bytesMax) ? bytesRemaining : bytesMax;
                 status = dmaRead(pvtrInfo->dmaId,VMEaddr,pvtrInfo->buffer,nbytes);
@@ -770,7 +732,7 @@ vtrarmChoices,
 vtrtriggerChoices,
 vtrmultiEventChoices,
 0, /* No preAverageChoices */
-0,0,0,0,0,0
+0,0,0,0,0
 };
 
 

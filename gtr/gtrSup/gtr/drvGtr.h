@@ -17,10 +17,11 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-
+#include <epicsTypes.h>
 typedef void *gtrPvt;
 typedef void (*gtrhandler)(void *pvt);
-typedef short int16;
+typedef epicsInt16 int16;
+typedef epicsUInt16 uint16;
 typedef enum {gtrStatusOK=0,gtrStatusBusy=-1,gtrStatusError=-2} gtrStatus;
 
 typedef struct gtrchannel {
@@ -62,7 +63,6 @@ typedef struct gtrops {
     void      *(*getUser)(gtrPvt pvt);
     void      (*lock)(gtrPvt pvt);
     void      (*unlock)(gtrPvt pvt);
-    gtrStatus (*voltageOffset)(gtrPvt pvt, int chan, double value);
 }gtrops;
 
 gtrPvt gtrFind(int card,gtrops **ppgtrops);

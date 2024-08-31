@@ -19,6 +19,7 @@
 R1.1.0  S. Condamoor 30-Aug-2024
     Branch epics-7-sdf
     Build with base 7.0.3.1-1.0 and sdf. 
+    Bring in sync the gtr modules with LCLS version of gtr
     
 R1.0.0   S. Condamoor 14-Aug-2024
 	  - Build with base 7.0.3.1-1.0

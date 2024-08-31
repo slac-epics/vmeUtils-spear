@@ -28,10 +28,6 @@
 #include "drvGtr.h"
 #include "drvVtr10010.h"
 
-#ifdef HAS_IOOPS_H
-#include <basicIoOps.h>
-#endif
-
 typedef unsigned char uint8;
 #define STATIC static
 
@@ -109,29 +105,21 @@ static int isRebooting;
 
 static void writeRegister(vtrInfo *pvtrInfo, int offset,uint8 value)
 {
-#ifdef HAS_IOOPS_H
-    out_8((volatile void*)(pvtrInfo->a16+offset),value);
-#else
     char *a16 = pvtrInfo->a16;
     uint8 *reg;
 
     reg = (uint8 *)(a16+offset);
     *reg = value;
-#endif
 }
 
 static uint8 readRegister(vtrInfo *pvtrInfo, int offset)
 {
-    uint8 value;
-#ifdef HAS_IOOPS_H
-    value = in_8((volatile void*)(pvtrInfo->a16+offset));
-#else
     char *a16 = pvtrInfo->a16;
     uint8 *reg;
+    uint8 value;
 
     reg = (uint8 *)(a16+offset);
     value = *reg;
-#endif
     return(value);
 }
 
@@ -506,7 +494,7 @@ vtrarmChoices,
 vtrtriggerChoices,
 0, /*no multiEventChoices*/
 0, /*no preAverageChoices*/
-0,0,0,0,0,0
+0,0,0,0,0
 };
 
 int vtr10010Config(int card,int a16offset,unsigned int a32offset,int intVec)

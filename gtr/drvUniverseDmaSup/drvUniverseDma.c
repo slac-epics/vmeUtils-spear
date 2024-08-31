@@ -1,8 +1,17 @@
+/*
+	Modified:	Shantha Condamoor
+	Date:		1-Jun-2011
+	Author:		Till Straumann
+	Patch:		BUGFIX: MUST NOT use a mutex for a lock since it is not released from
+   				the task context which acquired it!
+   				This bug caused a task to never relinquish a temporarily inherited,
+   				high priority (since it apparently always held this driver's mutex).
+	
+/*
 /* DMA Routines using the universe driver */
-
-/* Author/Copyright: Till Straumann <strauman@slac.stanford.edu>, 2002-2003 */
-
-/* LICENSE: the EPICS open license as distributed with this file */
+/* Author/Copyright: Till Straumann <strauman@slac.stanford.edu>, 2002-2003 */ 
+    
+/* LICENSE: the EPICS open license as distributed with this file */ 
 
 #include <stdlib.h>
 #include <errno.h>
@@ -101,8 +110,8 @@ unsigned long s=vmeUniverseReadReg(UNIV_REGOFF_DGCS);
 
 	if (inProgress) {
 		inProgress->dgcs   = s;
-		if ( (inProgress->status = (s & ERR_STAT_MASK) ? EIO : 0) )
-			universeDmaLastErrDGCS = s;
+        if ( (inProgress->status = (s & ERR_STAT_MASK) ? EIO : 0) ) 
+        	universeDmaLastErrDGCS = s; 
 		if (inProgress->callback)
 				inProgress->callback(inProgress->closure);
 		inProgress = 0;

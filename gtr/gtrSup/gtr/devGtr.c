@@ -29,7 +29,6 @@
 #include <dbCommon.h>
 #include <boRecord.h>
 #include <longoutRecord.h>
-#include <aoRecord.h>
 #include <mbboRecord.h>
 #include <stringinRecord.h>
 #include <waveformRecord.h>
@@ -79,15 +78,6 @@ typedef enum {
 static char *longoutParmString[NLOPARM] =
 {
     "numberPTS","numberPPS","numberPTE"
-};
-
-#define NAOPARM 1
-typedef enum {
-    voltageOffset
-}aoParm;
-static char *aoParmString[NAOPARM] =
-{
-    "voltageOffset"
 };
 
 #define NMBBOPARM 5
@@ -143,20 +133,6 @@ static long longout_init_record(dbCommon *precord);
 static long longout_write(dbCommon *precord);
 longoutdset devGtrLO = {5,0,0,longout_init_record,get_ioint_info,longout_write};
 epicsExportAddress(dset,devGtrLO);
-
-typedef struct aodset {
-    long      number;
-    DEVSUPFUN report;
-    DEVSUPFUN init;
-    DEVSUPFUN init_record;
-    DEVSUPFUN get_ioint_info;
-    DEVSUPFUN write;
-    DEVSUPFUN special_linconv;
-} aodset;
-static long ao_init_record(dbCommon *precord);
-static long ao_write(dbCommon *precord);
-aodset devGtrAO = {6,0,0,ao_init_record,get_ioint_info,ao_write,0};
-epicsExportAddress(dset,devGtrAO);
 
 typedef struct mbbodset {
     long      number;
@@ -285,7 +261,7 @@ static dpvt *common_init_record(dbCommon *precord,DBLINK *plink,
         (*pgtrops->setUser)(gtrpvt,pdevGtr);
         callbackSetCallback(myCallback,&pdevGtr->callback);
         callbackSetUser(pdevGtr,&pdevGtr->callback);
-        callbackSetPriority(priorityHigh,&pdevGtr->callback);
+        callbackSetPriority(priorityLow,&pdevGtr->callback);
         (*pgtrops->registerHandler)(gtrpvt,interruptHandler,pdevGtr);
         scanIoInit(&pdevGtr->ioscanpvt);
         (*pgtrops->setUser)(gtrpvt,pdevGtr);
@@ -407,66 +383,6 @@ static long longout_write(dbCommon *precord)
     }
     (*pgtrops->unlock)(gtrpvt);
     if(status!=gtrStatusOK) recGblSetSevr(plongoutRecord,STATE_ALARM,MINOR_ALARM);
-    return(0);
-}
-static long ao_init_record(dbCommon *precord)
-{
-    aoRecord *paoRecord = (aoRecord *)precord;
-    dpvt *pdpvt;
-    devGtr *pdevGtr;
-    struct vmeio *pvmeio;
-    int signal;
-    long status = 0;
-
-    common_init_record(precord,&paoRecord->out,aoParmString,NAOPARM);
-    pdpvt = paoRecord->dpvt;
-    if(!pdpvt) return(2);
-    pdevGtr = pdpvt->pdevGtr;
-    if(!pdevGtr) return(2);
-    pvmeio = &(paoRecord->out.value.vmeio);
-    signal = pvmeio->signal;
-    if(signal<0 || signal>=pdevGtr->channels.nchannels) {
-        status = S_db_badField;
-        signal = 0;
-        recGblRecordError(status,(void *)precord,
-            "devGtr Illegal signal");
-        paoRecord->pact = 1;
-        return(status);
-    }
-    pdpvt->signal = pvmeio->signal;
-    return(2);
-}
-
-static long ao_write(dbCommon *precord)
-{
-    aoRecord *paoRecord = (aoRecord *)precord;
-    dpvt *pdpvt;
-    devGtr *pdevGtr;
-    gtrPvt gtrpvt;
-    gtrops *pgtrops;
-    long status = 0;
-
-    pdpvt = paoRecord->dpvt;
-    if(!pdpvt) {
-        status = S_dev_NoInit;
-        recGblRecordError(status,(void *)paoRecord,
-            "devGtr init_record failed");
-        paoRecord->pact = 1;
-        return(status);
-    }
-    pdevGtr = pdpvt->pdevGtr;
-    gtrpvt = pdevGtr->gtrpvt;
-    pgtrops = pdevGtr->pgtrops;
-    (*pgtrops->lock)(gtrpvt);
-    switch(pdpvt->parm) {
-        case voltageOffset:
-	    status = (*pgtrops->voltageOffset)(gtrpvt,pdpvt->signal, paoRecord->val);
-            break;
-        default:
-            errlogPrintf("%s logic error\n",precord->name);
-    }
-    (*pgtrops->unlock)(gtrpvt);
-    if(status!=gtrStatusOK) recGblSetSevr(paoRecord,STATE_ALARM,MINOR_ALARM);
     return(0);
 }
 

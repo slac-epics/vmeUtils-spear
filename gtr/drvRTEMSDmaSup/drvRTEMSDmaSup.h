@@ -1,4 +1,4 @@
-/* $Id: drvRTEMSDmaSup.h,v 1.2 2008/03/15 00:13:58 saa Exp $ */
+/* $Id: drvUniverseDma.h,v 1.1.1.1 2004/11/05 21:26:06 saa Exp $ */
 
 /* EPICS glue to the RTEMS VMEDMA API */
 
@@ -10,7 +10,7 @@
 typedef void 		(*VOIDFUNCPTR)();
 typedef uint32_t UINT32;
 typedef uint16_t UINT16;
-typedef int      STATUS;
+typedef long		STATUS;
 
 typedef struct dmaRequest *DMA_ID;
 

@@ -14,7 +14,6 @@ TARGET_CFLAGS += $(CFLAGS_$(OS_CLASS)) $(CFLAGS_$(T_A))
 CFLAGS_vxWorks += -D__vxworks
 
 INC += drvUniverseDma.h
-INC += basicIoOps.h
 
 LIBRARY_RTEMS += drvUniverseDma
 

@@ -1,8 +1,19 @@
+/*
+	Modified:	Shantha Condamoor
+	Date:		1-Jun-2011
+	Author:		Till Straumann
+	Patch:		BUGFIX: MUST NOT use a mutex for a lock since it is not released from
+   				the task context which acquired it!
+   				This bug caused a task to never relinquish a temporarily inherited,
+   				high priority (since it apparently always held this driver's mutex).
+	
+*/
 /* DMA Routines using the RTEMS VME DMA API */
 
 #include <stdlib.h>
 #include <stdint.h>
 #include <errno.h>
+#include <assert.h>
 
 #include <epicsEvent.h>
 #include <epicsInterrupt.h>
@@ -59,7 +70,7 @@ unsigned long s=BSP_VMEDmaStatus(DMACHANNEL);
 static void
 rtemsVmeDmaInit(void)
 {
-	lock=epicsEventMustCreate( epicsEventFull );
+	lock=epicsEventMustCreate(epicsEventFull);
 
 	/* connect and enable DMA interrupt */
 	assert( 0==BSP_VMEDmaInstallISR(DMACHANNEL,rtemsVmeDmaIsr,0) );
@@ -110,48 +121,7 @@ dw2mode(int w)
 	return 0;
 }
 
-/*
- * Stephanie Allison found a problem (3/14/2008):
- * BLT out of a Joerger VTR10014's memory on MVME6100 resulted
- * in scrambled data.
- *
- * Here's what happened:
- *  - the VTR10014 requires 256-byte aligned addresses 
- *    for BLT (2k aligned for MBLT) (cf. their manual).
- *  - throttling mechanisms in the Tsi148 automatically
- *    and transparently break up BLTs (and MBLTs) when
- *    *either* of the conditions:
- *    a) the DMA block size is reached
- *    b) the VME bus release condition is met
- *    is satisfied.
- * Because the break-ups are not necessarily at 256b (or 2kb
- * for MBLTs) boundaries the VTR10014 sends wrong data.
- * 
- * The most stringent limitation was due to the default
- * setting of the Tsi148's VME Master control register:
- *    - default release condition: VTON timer expired OR xfer done
- *    - default VTON timer timeout: 4us. This likely limited the
- *      transfers to 64b (regardless of the DMA engine being 
- *      programmed for a larger block size).
- *
- * Workaround:
- *    - use BSP_VMEDMA_OPT_THROUGHPUT (DMA block size = 1k > 256b)
- *    - use recent RTEMS BSP (updated in 'official' CVS head on 2008/3/16)
- *      or use HACK (ONLY works on mvme6100 with Tsi148 that is mapped
- *      on VME!) [from cexp script]:
- *    
- *      vmeTsi148RegBase && (*(long*)(vmeTsi148RegBase+0x234) = 0x71b)
- *
- * IMO the VTR10014 is at fault here -- the VME standard says that
- * BLTs must not cross 256b boundaries (a rule which is observed by the
- * Tsi148) but it also says that VME slaves must latch the address on
- * the falling edge of AS -- requiring that the starting address
- * of a BLT must be 256b aligned is not explicitly allowed by the standard
- * (but not explicitly forbidden either).
- *
- * T.S, 2008/03/17
- */
-uint32_t rtemsVmeDmaBusMode = BSP_VMEDMA_OPT_THROUGHPUT;
+uint32_t rtemsVmeDmaBusMode = BSP_VMEDMA_OPT_SHAREDBUS;
 
 static STATUS
 rtemsVmeDmaStart(DMA_ID dmaId, uint32_t mode, void *pLocal, UINT32 vmeAddr, int length)

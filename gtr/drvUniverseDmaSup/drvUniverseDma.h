@@ -1,8 +1,4 @@
-/* $Id: drvUniverseDma.h,v 1.2 2011/06/03 23:33:27 saa Exp $ */
-
-/* Author/Copyright: Till Straumann <strauman@slac.stanford.edu>, 2002-2003 */
-
-/* LICENSE: the EPICS open license as distributed with this file */
+/* $Id: drvUniverseDma.h,v 1.1 2004/11/05 21:26:06 norume Exp $ */
 
 /* EPICS glue for the vmeUniverse driver */
 

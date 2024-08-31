@@ -1,64 +1,11 @@
 #ifndef TILLS_INPUT_OUTPUT_OPERA_H
 #define TILLS_INPUT_OUTPUT_OPERA_H
 
-/* $Id: basicIoOps.h,v 1.2 2011/06/03 23:33:57 saa Exp $ */
+/* $Id: basicIoOps.h,v 1.1 2004/11/05 21:26:05 norume Exp $ */
 
 #ifdef __rtems__
 #include <rtems.h>
-#include <stdint.h>
-
-#ifdef __m68k__
-#define iobarrier_r() do {} while (0)
-#define iobarrier_w() do {} while (0)
-#define iobarrier_rw() do {} while (0)
-
-static __inline__ uint8_t in_8(volatile uint8_t *p)
-{ return *p; }
-static __inline__ void    out_8(volatile uint8_t *p, uint8_t val)
-{ *p = val; }
-
-static __inline__ uint16_t in_be16(volatile uint16_t *p)
-{ return *p; }
-static __inline__ uint32_t in_be32(volatile uint32_t *p)
-{ return *p; }
-static __inline__ void out_be16(volatile uint16_t *p, uint16_t v)
-{ *p = v; }
-static __inline__ void out_be32(volatile uint32_t *p, uint32_t v)
-{ *p = v; }
-
-#ifdef __mcf5200__
-static __inline__ uint32_t BYTEREV(uint32_t v)
-{
-	__asm__ __volatile__ ("byterev %0":"+r"(v));
-	return v;
-}
-#else
-#define BYTEREV(v)  \
-		     (((((uint32_t)(v)) & 0xff000000) >> 24) |  \
-		      ((((uint32_t)(v)) & 0x00ff0000) >>  8) |  \
-		      ((((uint32_t)(v)) & 0x0000ff00) <<  8) |  \
-		      ((((uint32_t)(v)) & 0x000000ff) << 24))
-#endif
-
-#define BYTESWAP(x) ((((uint16_t)(x))>>8) | (((uint16_t)(x))<<8))
-
-static __inline__ uint16_t in_le16(volatile uint16_t *p)
-{ uint16_t v = *p; return BYTESWAP(v); }
-static __inline__ uint32_t in_le32(volatile uint32_t *p)
-{ uint32_t v = *p; return BYTEREV(v); }
-
-static __inline__ void out_le16(volatile uint16_t *p, uint16_t v)
-{
-	v = BYTESWAP(v); *p = v;
-}
-static __inline__ void out_le32(volatile uint32_t *p, uint32_t v)
-{
-	v = BYTEREV(v); *p = v;
-}
-
-#else
 #include <libcpu/io.h> /* rtems has these already */
-#endif
 #else
 
 #include <sys/types.h>
@@ -177,13 +124,13 @@ static const __EndianTestU endianTester={(int)1};
 #warning "Unknown IO barrier/synchronization for this CPU (add an #ifdef <YourCpu> around this warning if none needed by your CPU)"
 #endif
 
-#ifndef iobarrier_r
+#ifndef iobarrier_r()
 #define iobarrier_r() do{}while(0)
 #endif
-#ifndef iobarrier_rw
+#ifndef iobarrier_rw()
 #define iobarrier_rw() do{}while(0)
 #endif
-#ifndef iobarrier_w
+#ifndef iobarrier_w()
 #define iobarrier_w() do{}while(0)
 #endif
 

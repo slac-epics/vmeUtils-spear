@@ -13,24 +13,21 @@ include $(TOP)/configure/CONFIG
 GTRSUP = $(TOP)/gtrSup
 #USR_CFLAGS += -DDEBUG
 #USR_CFLAGS += -DHAS_UNIVERSEDMA
+USR_CFLAGS += -DHAS_RTEMSDMASUP
 
 LIBRARY_IOC += gtr
 gtr_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 SRC_DIRS += $(GTRSUP)/gtr
 INC += drvGtr.h
-#INC += epicsDma.h
+INC += epicsDma.h
 SRCS += devGtr.c drvGtr.c
-#VME_ONLY_SRCS += epicsDma.c 
+VME_ONLY_SRCS += epicsDma.c 
 DBD += gtr.dbd
 
 SRC_DIRS += $(GTRSUP)/sisfadc
 VME_ONLY_SRCS += drvSisfadc.c idrom.c
 DBD += drvSisfadc.dbd
-
-SRC_DIRS += $(GTRSUP)/sis3302
-VME_ONLY_SRCS += drvSis3302.c
-DBD += drvSis3302.dbd
 
 SRC_DIRS += $(GTRSUP)/vtr1012
 VME_ONLY_SRCS += drvVtr1012.c
@@ -48,18 +45,13 @@ SRC_DIRS += $(GTRSUP)/vtr812
 VME_ONLY_SRCS += drvVtr812.c
 DBD += drvVtr812.dbd
 
-SRC_DIRS += $(GTRSUP)/ecdrgcadc
-ifneq ($(T_A),RTEMS-mvme3100)
-VME_ONLY_SRCS += drvEcdrgcadc.c
-endif
-DBD += drvEcdrgcadc.dbd
+VME_YES_SRC=$(VME_ONLY_SRCS)
 
 
 #SRCS_RTEMS-mvme2100 += $(VME_ONLY_SRCS)
 #SRCS_RTEMS-mvme5500 += $(VME_ONLY_SRCS)
-SRCS_RTEMS          += $(VME_ONLY_SRCS)
-SRCS_vxWorks        += $(VME_ONLY_SRCS)
-SRCS += $(SRCS_$(T_A))
-
+SRCS_RTEMS += $(VME_ONLY_SRCS)
+#SRCS_vxWorks        += $(VME_ONLY_SRCS)
+SRCS += $(VME_$(HAVE_VME)_SRC)
 
 include $(TOP)/configure/RULES
