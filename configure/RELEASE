@@ -1,7 +1,7 @@
 #RELEASE Location of external products
 
-include $(TOP)/../../RELEASE_SITE_7.0.3.1-1.0
--include $(TOP)/configure/RELEASE-MODULES-master
+include $(TOP)/../../RELEASE_SITE_7.0.3.1-1.0_sdf
+#-include $(TOP)/configure/RELEASE-MODULES-master
 
 #MISCUTILS_SPEAR_MODULE_VERSION=miscUtils-spear-base7.0
 #MISCUTILS_SPEAR=$(EPICS_SITE_TOP_SPEAR)/epics/modules/miscUtils/$(MISCUTILS_SPEAR_MODULE_VERSION)
