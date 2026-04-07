@@ -337,6 +337,17 @@ STATIC void gtrunlock(gtrPvt pvt)
     epicsMutexUnlock(pgtrInfo->lock);
 }
 
+STATIC gtrStatus gtrvoltageOffset(gtrPvt pvt, int chan, double value)
+{
+    gtrInfo *pgtrInfo = (gtrInfo *)pvt;
+    
+    if(pgtrInfo->pgtrdrvops->voltageOffset) {
+        return (*pgtrInfo->pgtrdrvops->voltageOffset)(pgtrInfo->drvPvt,chan,value);
+    } else {
+        return(gtrStatusError);
+    }
+}
+
 static gtrops ops = {
 gtrinit,
 gtrreport,
@@ -364,7 +375,8 @@ gtrname,
 gtrsetUser,
 gtrgetUser,
 gtrlock,
-gtrunlock
+gtrunlock,
+gtrvoltageOffset
 };
 
 gtrPvt gtrFind(int card,gtrops **ppgtrops)

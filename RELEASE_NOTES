@@ -16,6 +16,9 @@
 #	* vsam          - VME Smart Analog Module
 #
 #--------------------------------------------------------------
+R1.1.1  C. Frisch 07-Apr-2026
+    Added in missing AO record support for the GTR DTYP from vmeUtils-R0-0-1
+
 R1.1.0  S. Condamoor 30-Aug-2024
     Branch epics-7-sdf
     Build with base 7.0.3.1-1.0 and sdf. 

@@ -63,6 +63,7 @@ typedef struct gtrops {
     void      *(*getUser)(gtrPvt pvt);
     void      (*lock)(gtrPvt pvt);
     void      (*unlock)(gtrPvt pvt);
+    gtrStatus (*voltageOffset)(gtrPvt pvt, int chan, double value);
 }gtrops;
 
 gtrPvt gtrFind(int card,gtrops **ppgtrops);
