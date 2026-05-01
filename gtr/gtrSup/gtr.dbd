@@ -1,3 +1,4 @@
+device(ao, VME_IO, devGtrAO, "GTR")
 device(bo,VME_IO,devGtrBO,"GTR")
 device(mbbo,VME_IO,devGtrMBBO,"GTR")
 device(longout,VME_IO,devGtrLO,"GTR")
