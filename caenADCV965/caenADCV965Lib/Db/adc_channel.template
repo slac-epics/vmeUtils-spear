@@ -1,0 +1,174 @@
+#
+# Caen V965 Charge Integrating ADC (QDC)
+#
+
+#
+# Converted Data for Input $(sig) on Board $(card)
+#
+record( ai, "$(dev):$(area):$(location):QDCRAW")
+        {
+        field( DESC, "$(desc)")
+        field( ASG,  "$(asg)")
+        field( SCAN, "I/O Intr")
+	field( PRIO, "HIGH")
+        field( PINI, "YES")
+        field( DTYP, "CAEN V965")
+        field( INP, "#C$(card) S$(sig) @")
+        field( LINR, "NO CONVERSION")
+        field( FLNK, "$(flnk)")
+        field( TSE,  "$(tse)")		
+        }
+
+#
+# Converted Data, High Range ADC for Input $(sig) on Board $(card)
+#
+record( longin, "$(dev):$(area):$(location):QDCRAWHI")
+        {
+        field( DESC, "High Range Charge Value")
+        field( ASG,  "$(asg)")
+        field( SCAN, "I/O Intr")
+        field( PINI, "YES")
+        field( DTYP, "CAEN V965")
+        field( INP, "#C$(card) S$(sig) @H")
+        }
+
+#
+# Converted Data, Low Range ADC for Input $(sig) on Board $(card)
+#
+record( longin, "$(dev):$(area):$(location):QDCRAWLO")
+        {
+        field( DESC, "Low Range Charge Value")
+        field( ASG,  "$(asg)")
+        field( SCAN, "I/O Intr")
+        field( PINI, "YES")
+        field( DTYP, "CAEN V965")
+        field( INP, "#C$(card) S$(sig) @L")
+        }
+
+#
+# Converted Data Status Bits (Over/Under Current Indicators) for Input $(sig) on Board $(card)
+#
+record( longin, "$(dev):$(area):$(location):QDCOUTRANGE")
+        {
+        field( DESC, "Range Status for Charge")
+        field( ASG,  "$(asg)")
+        field( SCAN, "I/O Intr")
+        field( DTYP, "CAEN V965")
+        field( INP, "#C$(card) S$(sig) @S")
+        }
+
+#
+# High Range Threshold for Input $(sig) on Board $(card)
+#
+record( longout, "$(dev):$(area):$(location):QDCHITHRESH")
+        {
+        field( DESC, "High Range Threshold")
+	field( DOL, "0")
+	field( PINI, "YES")
+        field( ASG,  "WIREADMIN")
+        field( SCAN, "Passive")
+        field( EVNT, "99")
+        field( DTYP, "CAEN V965")
+        field( OUT, "#C$(card) S$(sig) @TH")
+        }
+
+#
+# Low Range Threshold for Input $(sig) on Board $(card)
+#
+record( longout, "$(dev):$(area):$(location):QDCLOTHRESH")
+        {
+        field( DESC, "Low Range Threshold")
+	field( DOL, "0")
+	field( PINI, "YES")
+        field( ASG,  "WIREADMIN")
+        field( SCAN, "Passive")
+        field( EVNT, "99")
+        field( DTYP, "CAEN V965")
+        field( OUT, "#C$(card) S$(sig) @TL")
+        }
+
+#
+# Gain setting for Input $(sig) on Board $(card)
+#
+record( longout, "$(dev):$(area):$(location):QDCHILOGAIN")
+        {
+	field( DOL, "0")
+	field( PINI, "YES")
+        field( SCAN, "Passive")
+        field( ASG,  "WIREADMIN")
+        field( DTYP, "CAEN V965")
+        field( OUT, "#C$(card) S$(sig) @G")
+        }
+
+#
+# Get Current Pedestal for Baseline Correction on Board $(card)
+#
+#record( longin, "$(dev):$(area):$(location):QDCGETBASELN")
+#        {
+#        field( DESC, "Pedestal FOR QDC")
+#        field( ASG,  "$(asg)")
+#        field( SCAN, "1 second")
+#        field( PINI, "YES")
+#        field( DTYP, "CAEN V965")
+#        field( INP, "#C$(card) S0 @I")
+#        field( HOPR, "65535")
+#        field( LOPR, "0")
+#        }
+
+#
+# Set Current Pedestal for Baseline Correction on Board $(card)
+#
+#record( longout, "$(dev):$(area):$(location):QDCSETBASELN")
+#        {
+#        field( DESC, "Pedestal FOR QDC")
+#        field( ASG,  "WIREADMIN")
+#        field( SCAN, "Passive")
+#        field( PINI, "YES")
+#        field( DTYP, "CAEN V965")
+#        field( OUT, "#C$(card) S0 @I")
+#        field( HOPR, "255")
+#        field( DRVH, "255")
+#        field( LOPR, "0")
+#        field( DRVL, "0")
+#        }
+
+#
+# Read Serial Number on Board $(card)
+#
+#record( longin, "$(dev):$(area):$(location):QDCSERIALNUM")
+#        {
+#        field( DESC, "Module Serial Number")
+#        field( ASG,  "$(asg)")
+#        field( SCAN, "Passive")
+#        field( PINI, "YES")
+#        field( DTYP, "CAEN V965")
+#        field( INP, "#C$(card) S0 @N")
+#        field( HOPR, "65535")
+#        field( LOPR, "0")
+#        }
+
+#
+# Read Number of Triggers posted on Board $(card)
+#
+#record( longin, "$(dev):$(area):$(location):QDCTRIGGERS")
+#        {
+#        field( DESC, "Triggers")
+#        field( ASG,  "$(asg)")
+#        field( SCAN, "1 second")
+#        field( PINI, "YES")
+#        field( DTYP, "CAEN V965")
+#        field( INP, "#C$(card) S0 @E")
+#        }
+
+#
+# Buffer of measured charge per channel, associated with beam triggers
+#
+record( compress, "$(dev):$(area):$(location):QDCPROFILE")
+        {
+        field( DESC, "Beam Charge Circular Buffer")
+        field( ASG,  "$(asg)")
+        field( SCAN, "Passive")
+        field( ALG,  "Circular Buffer")
+        field( NSAM, "$(size)")
+        field( INP,  "$(dev):$(area):$(location):QDCRAW.VAL")
+        }

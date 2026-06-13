@@ -185,6 +185,7 @@ static int dmaRead(epicsDmaId dmaId,uint32 vmeaddr,uint32 *buffer,int len)
                                                     VME_AM_EXT_SUP_ASCENDING,
                                             len,
                                             4);
+    status = 1;
     if(status) {
         printf("vtr10012: dmaRead error %s\n",strerror(errno));
         return(-1);
@@ -202,8 +203,9 @@ static void writeRegister(vtrInfo *pvtrInfo, int offset,uint16 value)
 
     if(vtr10012Debug>=2)
         printf("VTR %2.2x <- %4.4X\n", offset, value);
+    
     reg = (uint16 *)(a16+offset);
-    *reg = value;
+    //*reg = value;
 }
 
 static uint16 readRegister(vtrInfo *pvtrInfo, int offset)
@@ -212,8 +214,11 @@ static uint16 readRegister(vtrInfo *pvtrInfo, int offset)
     uint16 *reg;
     uint16 value;
 
-    reg = (uint16 *)(a16+offset);
-    value = *reg;
+    printf("read reg pre\n");
+    //reg = (uint16 *)(a16+offset);
+    //value = *reg;
+    value = 0x0;
+    printf("read reg post\n");
     return(value);
 }
 

@@ -1,0 +1,61 @@
+#
+# Get Current Pedestal for Baseline Correction on Board $(card)
+#
+record( longin, "$(dev):$(area):$(location):QDCGETBASELN")
+        {
+        field( DESC, "Pedestal FOR QDC")
+        field( ASG,  "WIREUSER")
+        field( SCAN, "1 second")
+        field( PINI, "YES")
+        field( DTYP, "CAEN V965")
+        field( INP, "#C$(card) S0 @I")
+        field( HOPR, "65535")
+        field( LOPR, "0")
+        }
+
+
+#
+# Set Current Pedestal for Baseline Correction on Board $(card)
+#
+record( longout, "$(dev):$(area):$(location):QDCSETBASELN")
+        {
+        field( DESC, "Pedestal FOR QDC")
+        field( ASG,  "WIREADMIN")
+        field( SCAN, "Passive")
+        field( PINI, "YES")
+        field( DTYP, "CAEN V965")
+        field( OUT, "#C$(card) S0 @I")
+        field( HOPR, "255")
+        field( DRVH, "255")
+        field( LOPR, "0")
+        field( DRVL, "0")
+        }
+
+#
+# Read Serial Number on Board $(card)
+#
+record( longin, "$(dev):$(area):$(location):QDCSERIALNUM")
+        {
+        field( DESC, "Module Serial Number")
+        field( ASG,  "WIREUSER")
+        field( SCAN, "Passive")
+        field( PINI, "YES")
+        field( DTYP, "CAEN V965")
+        field( INP, "#C$(card) S0 @N")
+        field( HOPR, "65535")
+        field( LOPR, "0")
+        }
+
+#
+# Read Number of Triggers posted on Board $(card)
+#
+record( longin, "$(dev):$(area):$(location):QDCTRIGGERS")
+        {
+        field( DESC, "Triggers")
+        field( ASG,  "WIREUSER")
+        field( SCAN, "1 second")
+        field( PINI, "YES")
+        field( DTYP, "CAEN V965")
+        field( INP, "#C$(card) S0 @E")
+        }
+
