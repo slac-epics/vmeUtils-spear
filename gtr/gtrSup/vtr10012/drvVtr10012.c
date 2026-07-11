@@ -33,6 +33,8 @@
 #include "drvGtr.h"
 #include "drvVtr10012.h"
 
+#include <basicIoOps.h>
+
 typedef unsigned int uint32;
 
 #define NSAM10012_8 0x400
@@ -61,7 +63,7 @@ typedef unsigned int uint32;
 
 #define BUFLEN 2048
 
-int vtr10012Debug=2;
+int vtr10012Debug=0;
 
 typedef enum {vtrType10012,vtrType10012_8,vtrType8014,vtrType10014} vtrType;
 #define vtrNTypes vtrType10014 + 1
@@ -197,24 +199,14 @@ static int dmaRead(epicsDmaId dmaId,uint32 vmeaddr,uint32 *buffer,int len)
 
 static void writeRegister(vtrInfo *pvtrInfo, int offset,uint16 value)
 {
-    char *a16 = pvtrInfo->a16;
-    uint16 *reg;
-
     if(vtr10012Debug>=2)
         printf("VTR %2.2x <- %4.4X\n", offset, value);
-    reg = (uint16 *)(a16+offset);
-    *reg = value;
+    out_be16((volatile void *)(pvtrInfo->a16+offset), value);
 }
 
 static uint16 readRegister(vtrInfo *pvtrInfo, int offset)
 {
-    char *a16 = pvtrInfo->a16;
-    uint16 *reg;
-    uint16 value;
-
-    reg = (uint16 *)(a16+offset);
-    value = *reg;
-    return(value);
+    return in_be16((volatile void *)(pvtrInfo->a16+offset));
 }
 
 static void writeLocation(vtrInfo *pvtrInfo,int value)
@@ -265,19 +257,22 @@ void vtr10012IH(void *arg)
 {
     vtrInfo *pvtrInfo = (vtrInfo *)arg;
 
+    /* Do not use readRegister/writeRegister here: they may printf. */
     if(isRebooting || (pvtrInfo->arm == armDisarm)) {
-        writeRegister(pvtrInfo,DISARM,1); 
+        out_be16((volatile void *)(pvtrInfo->a16+DISARM),   1);
+        out_be16((volatile void *)(pvtrInfo->a16+RESETIRQ), 1);
         return;
     }
     if(pvtrInfo->type!=vtrType10012_8) {
-        uint16 regCPTCC = readRegister(pvtrInfo,CPTCC);
+        uint16 regCPTCC = in_be16((volatile void *)(pvtrInfo->a16+CPTCC));
         if(pvtrInfo->arm == armPostTrigger) {
             if(regCPTCC < pvtrInfo->numberPTE) return;
         } else if(pvtrInfo->arm == armPrePostTrigger) {
             if(regCPTCC < pvtrInfo->numberEvents)  return;
         }
     }
-    writeRegister(pvtrInfo,DISARM,1); 
+    out_be16((volatile void *)(pvtrInfo->a16+DISARM),   1);
+    out_be16((volatile void *)(pvtrInfo->a16+RESETIRQ), 1);
     if(pvtrInfo->usrIH) (*pvtrInfo->usrIH)(pvtrInfo->handlerPvt);
 }
 
