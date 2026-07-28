@@ -20,6 +20,8 @@
 #include <epicsThread.h>
 #include <epicsExit.h>
 #include <epicsExport.h>
+#include <epicsTypes.h>
+#include <epicsMMIO.h>
 
 /*Following needed for block transfer requests*/
 #include <epicsDma.h>
@@ -34,8 +36,6 @@
 
 int vtr812Debug=0;
 int vtr812UseDma = 0;
-typedef unsigned int uint32;
-typedef unsigned char uint8;
 
 #define STATIC static
 #define BUFLEN 2048
@@ -55,7 +55,7 @@ typedef enum {vtrType812_10,vtrType812_40} vtrType;
 static const char *vtrname[vtr812NTypes] = {
     "VTR812/10","VTR812/40"
 };
-static int16 dataMask[vtr812NTypes] = {0x0fff,0x0fff};
+static epicsInt16 dataMask[vtr812NTypes] = {0x0fff,0x0fff};
 
 #define nclockChoices812_10 16
 static char *clockChoices812_10[nclockChoices812_10] = {
@@ -131,7 +131,7 @@ typedef struct vtrInfo {
     int     memsize;
     int     memoffset;
     char    *memory;
-    uint32  *buffer;
+    epicsUInt32  *buffer;
     int     intVec;
     int     intLev;
     int     hasMultiPrePost;
@@ -153,7 +153,7 @@ static int vtrIsInited = 0;
 static int isRebooting;
 #define isArmed(pvtrInfo) ((readRegister((pvtrInfo),CSR2)&0x40) ? 1 : 0)
 
-static int dmaRead(epicsDmaId dmaId,uint32 vmeaddr,uint32 *buffer,int len)
+static int dmaRead(epicsDmaId dmaId,epicsUInt32 vmeaddr,epicsUInt32 *buffer,int len)
 {
     int status;
 
@@ -172,29 +172,20 @@ static int dmaRead(epicsDmaId dmaId,uint32 vmeaddr,uint32 *buffer,int len)
     return(0);
 }
 
-static void writeRegister(vtrInfo *pvtrInfo, int offset,uint8 value)
+static void writeRegister(vtrInfo *pvtrInfo, int offset,epicsUInt8 value)
 {
-    char *a16 = pvtrInfo->a16;
-    uint8 *reg;
-
-    reg = (uint8 *)(a16+offset);
-    *reg = value;
+    iowrite8(pvtrInfo->a16+offset,value);
     if(vtr812Debug) printf("writeRegister reg %2.2x = %2.2x\n",offset,value);
 }
 
-static uint8 readRegister(vtrInfo *pvtrInfo, int offset)
+static epicsUInt8 readRegister(vtrInfo *pvtrInfo, int offset)
 {
-    char *a16 = pvtrInfo->a16;
-    uint8 *reg;
-    uint8 value;
-
-    reg = (uint8 *)(a16+offset);
-    value = *reg;
+    epicsUInt8 value = ioread8(pvtrInfo->a16+offset);
     if(vtr812Debug) printf("readRegister reg %2.2x = %2.2x\n",offset,value);
     return(value);
 }
 
-static void writeLocation(vtrInfo *pvtrInfo,uint32 value)
+static void writeLocation(vtrInfo *pvtrInfo,epicsUInt32 value)
 {
     if(vtr812Debug) printf("writeLocation %x\n",value);
     writeRegister(pvtrInfo,HBMLC,(value>>16)&0xff);
@@ -202,10 +193,10 @@ static void writeLocation(vtrInfo *pvtrInfo,uint32 value)
     writeRegister(pvtrInfo,LBMLC,value&0xff);
 }
 
-static uint32 readLocation(vtrInfo *pvtrInfo)
+static epicsUInt32 readLocation(vtrInfo *pvtrInfo)
 {
-    uint8 low,middle,high;
-    uint32 value;
+    epicsUInt8 low,middle,high;
+    epicsUInt32 value;
 
     high = readRegister(pvtrInfo,HBMLC);
     middle = readRegister(pvtrInfo,MBMLC);
@@ -223,10 +214,10 @@ static void writeGate(vtrInfo *pvtrInfo,int value)
     writeRegister(pvtrInfo,LBGDR,value&0xff);
 }
 
-static uint32 readPmemAddress(vtrInfo *pvtrInfo)
+static epicsUInt32 readPmemAddress(vtrInfo *pvtrInfo)
 {
-    uint8 low,middle,high;
-    uint32 value;
+    epicsUInt8 low,middle,high;
+    epicsUInt32 value;
 
     high = readRegister(pvtrInfo,HBPMemS);
     middle = readRegister(pvtrInfo,MBPMemS);
@@ -258,24 +249,24 @@ static void initialize()
     epicsAtExit(vtrReboot,NULL);
 }
 
-void vtr812IH(void *arg)
+static void vtr812IH(void *arg)
 {
     vtrInfo *pvtrInfo = (vtrInfo *)arg;
 
-    /*DONT use readRegister or writeRegister in interrupt handler*/
+    /*DONT use readRegister or writeRegister in interrupt handler (they printf)*/
     if(isRebooting || (pvtrInfo->arm == armDisarm)) {
-        *(uint8 *)(pvtrInfo->a16+Disarm) = 1;
+        iowrite8(pvtrInfo->a16+Disarm,1);
         return;
     }
     if(pvtrInfo->arm == armPostTrigger) {
         if(++pvtrInfo->numberTriggersSoFar < pvtrInfo->numberPTE) return;
     } else if (pvtrInfo->arm == armPrePostTrigger) {
         if(pvtrInfo->numberEvents>1) {
-            int value = (int)(*(uint8 *)(pvtrInfo->a16+PmemCounter));
+            int value = (int)ioread8(pvtrInfo->a16+PmemCounter);
             if(value < pvtrInfo->numberEvents)  return;
         }
     }
-    *(uint8 *)(pvtrInfo->a16+Disarm) = 1;
+    iowrite8(pvtrInfo->a16+Disarm,1);
     if(pvtrInfo->usrIH) (*pvtrInfo->usrIH)(pvtrInfo->handlerPvt);
 }
 
@@ -314,10 +305,10 @@ STATIC gtrStatus vtrclock(gtrPvt pvt, int value)
 { 
     vtrInfo *pvtrInfo = (vtrInfo *)pvt;
     int nchoices;
-    uint8 csr1Value,csr2Value;
+    epicsUInt8 csr1Value,csr2Value;
 
-    if(isArmed(pvtrInfo)) return(gtrStatusBusy);
     if(isRebooting) epicsThreadSuspendSelf();
+    if(isArmed(pvtrInfo)) return(gtrStatusBusy);
     nchoices = nclockChoices[pvtrInfo->type];
     if(value<0 || value>=nchoices) return(gtrStatusError);
     csr1Value = readRegister(pvtrInfo,CSR1) & 0xf8;
@@ -337,7 +328,7 @@ STATIC gtrStatus vtrclock(gtrPvt pvt, int value)
 STATIC gtrStatus vtrtrigger(gtrPvt pvt, int value)
 {
     vtrInfo *pvtrInfo = (vtrInfo *)pvt;
-    uint8 csr2Value;
+    epicsUInt8 csr2Value;
 
     if(isRebooting) epicsThreadSuspendSelf();
     if(value<0 || value>ntriggerChoices) return(gtrStatusError);
@@ -369,8 +360,8 @@ STATIC gtrStatus vtrmultiEvent(gtrPvt pvt, int value)
         return(gtrStatusOK);
     }
     if(value<0 || value>=nmultiEventChoices) return(gtrStatusError);
-    if(isArmed(pvtrInfo)) return(gtrStatusBusy);
     if(isRebooting) epicsThreadSuspendSelf();
+    if(isArmed(pvtrInfo)) return(gtrStatusBusy);
     pvtrInfo->indMultiEventNumber = value;
     pvtrInfo->numberEvents = numberEvents[pvtrInfo->indMultiEventNumber];
     return(gtrStatusOK);
@@ -406,7 +397,7 @@ STATIC gtrStatus vtrnumberPTE(gtrPvt pvt, int value)
 STATIC gtrStatus vtrarm(gtrPvt pvt, int typ)
 {
     vtrInfo *pvtrInfo = (vtrInfo *)pvt;
-    uint8 csr2Value;
+    epicsUInt8 csr2Value;
     armType arm = (armType)typ;
 
     pvtrInfo->arm = armDisarm;
@@ -428,7 +419,7 @@ STATIC gtrStatus vtrarm(gtrPvt pvt, int typ)
         break;
     case armPrePostTrigger: {
         if(pvtrInfo->indMultiEventNumber>1) {
-            uint8 multi = 0x04|(pvtrInfo->indMultiEventNumber - 1);
+            epicsUInt8 multi = 0x04|(pvtrInfo->indMultiEventNumber - 1);
             writeRegister(pvtrInfo,MultiPrePost,multi);
         }
         /*NOTE: bits 0x30 must be set twice*/
@@ -455,10 +446,10 @@ STATIC gtrStatus vtrsoftTrigger(gtrPvt pvt)
 }
 
 STATIC void readContiguous(vtrInfo *pvtrInfo,
-    gtrchannel *phigh,gtrchannel *plow,uint32 *pmemory,
+    gtrchannel *phigh,gtrchannel *plow,epicsUInt32 *pmemory,
     int nmax,int *nskipHigh, int *nskipLow)
 {
-    int16 high,low,mask;
+    epicsInt16 high,low,mask;
     int ind;
     int bufOffset = BUFLEN;
 
@@ -466,17 +457,17 @@ STATIC void readContiguous(vtrInfo *pvtrInfo,
         printf("readContiguous pmemory %p nmax %d\n",pmemory,nmax);
     mask = dataMask[pvtrInfo->type];
     for(ind=0; ind<nmax; ind++) {
-        uint32 word;
+        epicsUInt32 word;
 
         if(pvtrInfo->dmaId && vtr812UseDma) {
             if(bufOffset>=BUFLEN) {
                 int status;
-                uint32 VMEaddr,bytesRemaining,bytesMax,nbytes;
+                epicsUInt32 VMEaddr,bytesRemaining,bytesMax,nbytes;
                 VMEaddr = pvtrInfo->memoffset
                     + ((char *)(pmemory) - pvtrInfo->memory)
-                    + ind * sizeof(uint32);
-                bytesRemaining = (nmax-ind)*sizeof(uint32);
-                bytesMax = BUFLEN*sizeof(uint32);
+                    + ind * sizeof(epicsUInt32);
+                bytesRemaining = (nmax-ind)*sizeof(epicsUInt32);
+                bytesMax = BUFLEN*sizeof(epicsUInt32);
                 nbytes = (bytesRemaining<bytesMax) ? bytesRemaining : bytesMax;
                 status = dmaRead(pvtrInfo->dmaId,VMEaddr,pvtrInfo->buffer,nbytes);
                 if(status) break;
@@ -507,7 +498,7 @@ STATIC gtrStatus readPostTrigger(vtrInfo *pvtrInfo,gtrchannel **papgtrchannel)
     int indgroup;
 
     for(indgroup=0; indgroup<4; indgroup++) {
-        uint32 *pgroup = (uint32 *)(pvtrInfo->memory + indgroup*GROUPMEMSIZE);
+        epicsUInt32 *pgroup = (epicsUInt32 *)(pvtrInfo->memory + indgroup*GROUPMEMSIZE);
         gtrchannel *phigh,*plow;
         int ndata,nskipHigh,nskipLow;
 
@@ -525,7 +516,7 @@ STATIC gtrStatus readPrePostTrigger(vtrInfo *pvtrInfo,gtrchannel **papgtrchannel
 {
     int numberPPS = pvtrInfo->numberPPS;
     int nevents = pvtrInfo->numberEvents;
-    uint32 eventsize;
+    epicsUInt32 eventsize;
     int indevent;
 
     if(nevents>1) {
@@ -538,7 +529,7 @@ STATIC gtrStatus readPrePostTrigger(vtrInfo *pvtrInfo,gtrchannel **papgtrchannel
     if(numberPPS>eventsize) numberPPS = eventsize;
     if(numberPPS==0) return(gtrStatusOK);
     for(indevent=0; indevent<nevents; indevent++) {
-        uint32 location;
+        epicsUInt32 location;
         int indgroup;
 
         if(nevents==1) {
@@ -555,8 +546,8 @@ STATIC gtrStatus readPrePostTrigger(vtrInfo *pvtrInfo,gtrchannel **papgtrchannel
         location += 1;
         if(location==eventsize) location = 0;
         for(indgroup=0; indgroup<4; indgroup++) {
-            uint32 *pgroup = (uint32 *)(pvtrInfo->memory + indgroup*GROUPMEMSIZE);
-            uint32 *pmemory = pgroup + indevent*eventsize;
+            epicsUInt32 *pgroup = (epicsUInt32 *)(pvtrInfo->memory + indgroup*GROUPMEMSIZE);
+            epicsUInt32 *pmemory = pgroup + indevent*eventsize;
             gtrchannel *phigh,*plow;
             int nskipHigh,nskipLow,nhigh,nlow,nmax;
 
@@ -705,13 +696,13 @@ int vtr812Config(int card,
 {
     char *a16;
     gtrops *pgtrops;
-    uint8 probeValue = 0;
+    epicsUInt8 probeValue = 0;
     vtrInfo *pvtrInfo;
     long status;
     vtrType type;
     char *memory;
     epicsDmaId dmaId = 0;
-    uint8 idModType,idMemSize,multiIndex;
+    epicsUInt8 idModType,idMemSize,multiIndex;
 
     if(!vtrIsInited) initialize();
     if(gtrFind(card,&pgtrops)) {
@@ -762,7 +753,7 @@ int vtr812Config(int card,
         return(0);
     }
     if(dmaId) {
-        pvtrInfo->buffer = calloc(BUFLEN,sizeof(uint32));
+        pvtrInfo->buffer = calloc(BUFLEN,sizeof(epicsUInt32));
         if(!pvtrInfo->buffer) {
             printf("vtrConfig: calloc failed\n");
             return(0);
@@ -803,7 +794,7 @@ static const iocshArg vtr812ConfigArg0 = { "card",iocshArgInt};
 static const iocshArg vtr812ConfigArg1 = { "VME A16 offset",iocshArgInt};
 static const iocshArg vtr812ConfigArg2 = { "VME memory offset",iocshArgInt};
 static const iocshArg vtr812ConfigArg3 = { "interrupt vector",iocshArgInt};
-static const iocshArg *vtr812ConfigArgs[] = {
+static const iocshArg * const vtr812ConfigArgs[] = {
     &vtr812ConfigArg0, &vtr812ConfigArg1, &vtr812ConfigArg2, &vtr812ConfigArg3};
 static const iocshFuncDef vtr812ConfigFuncDef =
                       {"vtr812Config",4,vtr812ConfigArgs};
