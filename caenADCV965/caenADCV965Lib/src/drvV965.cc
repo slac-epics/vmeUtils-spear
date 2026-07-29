@@ -383,7 +383,7 @@ show( int level)
         }
 
 int drvCaenV965Device::
-recordInit( DBLINK *pLink, dbCommon *pRec)
+recordInit( DBLINK *pLink, dbCommon *pRec, bool isOutput)
         {
         int card;
         int rv = 0;
@@ -401,11 +401,24 @@ recordInit( DBLINK *pLink, dbCommon *pRec)
 
         signal = pLink->value.vmeio.signal;
 
-        if( signal < 0 || drvCaenV965Registers::CAEN_NUM_SIGNALS < signal)
+        if( signal < 0 || signal >= drvCaenV965Registers::CAEN_NUM_SIGNALS)
                 return -1;
 
         if( pLink->value.vmeio.parm)
                 pparm = pLink->value.vmeio.parm;
+
+        if( isOutput)
+                {
+                switch( *pparm)
+                        {
+                case 'I': case 'G': case 'T':
+                        return 0;
+                default:
+                        printf("drvCaenV965: parm '%c' not writable on card %d signal %d\n",
+                                *pparm?*pparm:' ', card, signal);
+                        return -1;
+                        }
+                }
 
         switch( *pparm)
                 {
@@ -471,7 +484,7 @@ getValue( int signal, const char * pparm , epicsInt32 * value) // Returns status
         int rv = 0;
         long tmp;
 
-        if( signal < 0 || drvCaenV965Registers::CAEN_NUM_SIGNALS < signal)
+        if( signal < 0 || signal >= drvCaenV965Registers::CAEN_NUM_SIGNALS)
                 return -1;
 
 	// Grab the field type:
@@ -572,7 +585,7 @@ putValue( int signal , const char * pparm, epicsInt32  value) // Return status
         int parm = 0;
         int sparm = 0;
 
-        if( signal < 0 || drvCaenV965Registers::CAEN_NUM_SIGNALS < signal) 
+        if( signal < 0 || signal >= drvCaenV965Registers::CAEN_NUM_SIGNALS) 
                 return -1;
 
         if( pparm)
@@ -615,7 +628,7 @@ getIOIntInfo( int cmd, DBLINK * pLink, IOSCANPVT * ppvt)
         if( card < 0 || card >= NUM_BOARDS || NULL == ( pDev= pDevice[card]))
                 return -1;
         int signal = pLink->value.vmeio.signal;
-        if( signal < 0 || drvCaenV965Registers::CAEN_NUM_SIGNALS < signal)
+        if( signal < 0 || signal >= drvCaenV965Registers::CAEN_NUM_SIGNALS)
                 return -1;
 
 

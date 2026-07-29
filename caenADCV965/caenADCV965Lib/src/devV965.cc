@@ -194,8 +194,8 @@ epicsExportAddress( dset, devCaenV965Longout);
 long LongOutDset::
 InitRecord( longoutRecord *pRec)
         {
-        
-        if( drvCaenV965Device::recordInit( &pRec->out, (dbCommon *)pRec) != 0)
+
+        if( drvCaenV965Device::recordInit( &pRec->out, (dbCommon *)pRec, true) != 0)
                 {
                 recGblRecordError( S_db_badField, (void *)pRec, (char *)"devCaenV965Longout (init_record) Illegal OUT field");
                 return S_db_badField;

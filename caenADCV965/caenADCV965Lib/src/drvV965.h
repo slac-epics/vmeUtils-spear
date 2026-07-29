@@ -62,7 +62,7 @@ class drvCaenV965Device
                 unsigned short getIped();
                 void setIped( unsigned short);
 
-                static int recordInit( DBLINK *pLink, dbCommon *pRec); // Do any per-record initialization
+                static int recordInit( DBLINK *pLink, dbCommon *pRec, bool isOutput = false); // Do any per-record initialization
                 int putValue( int signal, const char *parm, epicsInt32 value); // Return status
                 static int putValue( DBLINK *pLink, epicsInt32 value); // Return status
                 int getValue( int signal, const char *parm , epicsInt32 *value); // Return status
