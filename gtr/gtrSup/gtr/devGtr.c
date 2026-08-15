@@ -207,6 +207,7 @@ static void myCallback(CALLBACK *pcallback)
 
     callbackGetUser(pdevGtr,pcallback);
     pgtrops = pdevGtr->pgtrops;
+    (*pgtrops->lock)(pdevGtr->gtrpvt);
     if(pdevGtr->channels.hasWaveforms) {
         status = (*pgtrops->readMemory)(pdevGtr->gtrpvt,pdevGtr->channels.papgtrchannel);
         if(status!=gtrStatusOK)
@@ -217,7 +218,9 @@ static void myCallback(CALLBACK *pcallback)
         if(status!=gtrStatusOK)
             printf("devGtr: myCallback raw read failed\n");
     }
+    (*pgtrops->unlock)(pdevGtr->gtrpvt);
     scanIoRequest(pdevGtr->ioscanpvt);
+    
 }
 
 static void interruptHandler(void *pvt)
@@ -366,8 +369,9 @@ static long bo_write(dbCommon *precord)
 static long longout_init_record(dbCommon *precord)
 {
     longoutRecord *plongoutRecord = (longoutRecord *)precord;
-
+    
     common_init_record(precord,&plongoutRecord->out,longoutParmString,NLOPARM);
+   
     return(0);
 }
 
@@ -405,6 +409,7 @@ static long longout_write(dbCommon *precord)
         default:
             errlogPrintf("%s logic error\n",precord->name);
     }
+
     (*pgtrops->unlock)(gtrpvt);
     if(status!=gtrStatusOK) recGblSetSevr(plongoutRecord,STATE_ALARM,MINOR_ALARM);
     return(0);
@@ -617,43 +622,53 @@ static long waveform_init_record(dbCommon *precord)
 
     pdpvt = common_init_record(precord,&pwaveformRecord->inp,
         waveformParmString,NWFPARM);
+
     if(!pdpvt) return(0);
+
     pdevGtr = pdpvt->pdevGtr;
+
     if(!pdevGtr) return(0);
+
     gtrpvt = pdevGtr->gtrpvt;
     pgtrops = pdevGtr->pgtrops;
-    switch(pdpvt->parm) {
-    case readData:     pdevgtrchannels=&pdevGtr->channels;     break;
-    case readRawData:  pdevgtrchannels=&pdevGtr->rawChannels;  break;
-    default:           return(S_db_badField);
-    }
-    switch(ftvl) {
-    default:
-        status = S_db_badField;
-        recGblRecordError(status,(void *)precord,
-            "FTVL must be SHORT FLOAT or DOUBLE");
-        pwaveformRecord->pact = 1;
-        return(status);
-    
-    case menuFtypeLONG: /* Limits must come from database */
-            break;
 
-    case menuFtypeSHORT: {
-        short rawLow,rawHigh;
-        (*pgtrops->getLimits)(gtrpvt,&rawLow,&rawHigh);
-        pwaveformRecord->hopr = rawHigh;
-        pwaveformRecord->lopr = rawLow;
-        }
-        break;
-
-    case menuFtypeFLOAT:
-    case menuFtypeDOUBLE:
-        pwaveformRecord->hopr = 1.0;
-        pwaveformRecord->lopr = 0.0;
-        break;
+    switch(pdpvt->parm) 
+    {
+    	case readData:     pdevgtrchannels=&pdevGtr->channels;     break;
+    	case readRawData:  pdevgtrchannels=&pdevGtr->rawChannels;  break;
+    	default:           return(S_db_badField);
     }
+
+    switch(ftvl) 
+    {
+	    default:
+		status = S_db_badField;
+		recGblRecordError(status,(void *)precord,
+		    "FTVL must be SHORT FLOAT or DOUBLE");
+		pwaveformRecord->pact = 1;
+		return(status);
+	    
+	    case menuFtypeLONG: /* Limits must come from database */
+		    break;
+
+	    case menuFtypeSHORT: {
+		short rawLow,rawHigh;
+		(*pgtrops->getLimits)(gtrpvt,&rawLow,&rawHigh);
+		pwaveformRecord->hopr = rawHigh;
+		pwaveformRecord->lopr = rawLow;
+		}
+		break;
+
+	    case menuFtypeFLOAT:
+	    case menuFtypeDOUBLE:
+		pwaveformRecord->hopr = 1.0;
+		pwaveformRecord->lopr = 0.0;
+		break;
+    }
+
     pvmeio = &(pwaveformRecord->inp.value.vmeio);
     signal = pvmeio->signal;
+
     if(signal<0 || signal>=pdevgtrchannels->nchannels) {
         status = S_db_badField;
         signal = 0;
@@ -662,20 +677,25 @@ static long waveform_init_record(dbCommon *precord)
         pwaveformRecord->pact = 1;
         return(status);
     }
+
     pdpvt->signal = pvmeio->signal;
     pgtrchannel = &pdevgtrchannels->pachannel[pdpvt->signal];
+
     if(((ftvl==menuFtypeSHORT)||(ftvl==menuFtypeLONG)) && !pgtrchannel->pdata) {
         pgtrchannel->pdata = pwaveformRecord->bptr;
         pgtrchannel->len = pwaveformRecord->nelm;
         pgtrchannel->ftvl = ftvl;
         pdpvt->isPdataBptr = 1;
-    } else if(!pgtrchannel->pdata || pgtrchannel->len<pwaveformRecord->nelm) {
+    } 
+    else if(!pgtrchannel->pdata || pgtrchannel->len<pwaveformRecord->nelm) 
+    {
         if(pgtrchannel->pdata && !pdpvt->isPdataBptr) free(pgtrchannel->pdata);
         pdpvt->isPdataBptr = 0;
         pgtrchannel->pdata = dbCalloc(pwaveformRecord->nelm, sizeof(int16));
         pgtrchannel->len = pwaveformRecord->nelm;
         pgtrchannel->ftvl = menuFtypeSHORT;
     }
+
     precord->dpvt = pdpvt;
     pdevgtrchannels->hasWaveforms=1;
     return(0);
@@ -694,57 +714,125 @@ static long waveform_read(dbCommon *precord)
     devGtrChannels *pdevgtrchannels;
 
     pdpvt = pwaveformRecord->dpvt;
-    if(!pdpvt) {
+
+    if(!pdpvt) 
+    {
         status = S_dev_NoInit;
         recGblRecordError(status,(void *)precord,
             "devGtr init_record failed");
         precord->pact = 1;
         return(status);
     }
+
     pdevGtr = pdpvt->pdevGtr;
     gtrpvt = pdevGtr->gtrpvt;
     pgtrops = pdevGtr->pgtrops;
-    switch(pdpvt->parm) {
-    case readData:     pdevgtrchannels=&pdevGtr->channels;     break;
-    case readRawData:  pdevgtrchannels=&pdevGtr->rawChannels;  break;
-    default:           return(S_db_badField);
+    switch(pdpvt->parm) 
+    {
+        case readData:     pdevgtrchannels=&pdevGtr->channels;     break;
+        case readRawData:  pdevgtrchannels=&pdevGtr->rawChannels;  break;
+        default:           return(S_db_badField);
     }
+
     pgtrchannel = &pdevgtrchannels->pachannel[pdpvt->signal];
     ndata = pgtrchannel->ndata;
-    if(ndata>pwaveformRecord->nelm) ndata = pwaveformRecord->nelm;
-    if(ndata>0 ) {
+
+    if(ndata>pwaveformRecord->nelm) 
+       ndata = pwaveformRecord->nelm;
+    
+    if(ndata>0 ) 
+    {
         pwaveformRecord->nord = ndata;
-    } else {
+    } 
+    else 
+    {
         recGblSetSevr(precord,STATE_ALARM,MINOR_ALARM);
         return(0);
     }
+
     if(pwaveformRecord->bptr==pgtrchannel->pdata) return(0);
+
     if(pwaveformRecord->ftvl == menuFtypeSHORT) {
         memcpy(pwaveformRecord->bptr,pgtrchannel->pdata,ndata*sizeof(int16));
-    } else if(pwaveformRecord->ftvl == menuFtypeLONG) {
+    } 
+    else if(pwaveformRecord->ftvl == menuFtypeLONG) 
+    {
         memcpy(pwaveformRecord->bptr,pgtrchannel->pdata,ndata*sizeof(long));
-    } else {
+    } 
+    else  
+    {
         int16 rawLow,rawHigh;
         int16 *pfrom = pgtrchannel->pdata;
         int ind;
         (*pgtrops->getLimits)(gtrpvt,&rawLow,&rawHigh);
-        if(pwaveformRecord->ftvl==menuFtypeFLOAT) {
+
+        if(pwaveformRecord->ftvl==menuFtypeFLOAT) 
+        {
             float *pto = (float *)pwaveformRecord->bptr;
             float low,high,diff;
             low = (float)rawLow; high = (float)rawHigh; diff = high - low;
             for(ind=0; ind<ndata; ind++)
                 *pto++ = ((float)(*pfrom++) -low)/diff;
-        } else if(pwaveformRecord->ftvl==menuFtypeDOUBLE) {
+        }  
+        else if(pwaveformRecord->ftvl==menuFtypeDOUBLE) 
+        {
             double *pto = (double *)pwaveformRecord->bptr;
                 double low,high,diff;
                 low = (double)rawLow; high = (double)rawHigh; diff = high - low;
                 for(ind=0; ind<ndata; ind++)
                     *pto++ = ((double)(*pfrom++) -low)/diff;
-        } else {
+        }  
+        else 
+        {
             recGblRecordError(S_db_badField,(void *)precord,
                 "devGtr FTVL must be SHORT or FLOAT or DOUBLE");
             pwaveformRecord->pact = 1;
         }
     }
+
     return(0);
+}
+
+/* Temporary diagnostic - resolve relocated addresses from a crash dump.
+ * Call from st.cmd after ld() with addresses from the previous boot. */
+typedef struct { const char *name; void *addr; } gtrSym;
+
+void gtrWhere(unsigned long a)
+{
+    //static const gtrSym tbl[] = { /* ...as before... */ {0,0} };
+    static const gtrSym tbl[] = {
+        {"myCallback",            (void*)myCallback},
+        {"interruptHandler",      (void*)interruptHandler},
+        {"get_ioint_info",        (void*)get_ioint_info},
+        {"common_init_record",    (void*)common_init_record},
+        {"bo_write",              (void*)bo_write},
+        {"longout_write",         (void*)longout_write},
+        {"ao_write",              (void*)ao_write},
+        {"mbbo_write",            (void*)mbbo_write},
+        {"waveform_init_record",  (void*)waveform_init_record},
+        {"waveform_read",         (void*)waveform_read},
+        {0,0}
+    };
+
+
+    const gtrSym *best = 0;
+    int i;
+    for (i = 0; tbl[i].name; i++)
+        if ((unsigned long)tbl[i].addr <= a &&
+            (!best || tbl[i].addr > best->addr)) best = &tbl[i];
+    if (best && (a - (unsigned long)best->addr) < 0x2000)
+        printf("0x%08lx = %s + 0x%lx\n", a, best->name,
+               a - (unsigned long)best->addr);
+    else
+        printf("0x%08lx = NOT in table (nearest below: %s)\n", a,
+               best ? best->name : "none");
+}
+
+void gtrDumpSyms(void)
+{
+    printf("myCallback           %p\n", (void*)myCallback);
+    printf("waveform_read        %p\n", (void*)waveform_read);
+    printf("waveform_init_record %p\n", (void*)waveform_init_record);
+    printf("longout_write        %p\n", (void*)longout_write);
+    printf("common_init_record   %p\n", (void*)common_init_record);
 }

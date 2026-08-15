@@ -815,6 +815,7 @@ drvVtr812RegisterCommands(void)
         iocshRegister(&vtr812ConfigFuncDef,vtr812ConfigCallFunc);
         firstTime = 0;
     }
+
 }
 epicsExportRegistrar(drvVtr812RegisterCommands);
 
