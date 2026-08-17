@@ -16,6 +16,11 @@
 #	* vsam          - VME Smart Analog Module
 #
 #--------------------------------------------------------------
+R1.1.2  C. Frisch 17-Aug-2026
+    Added Mutex lock to myCallback to ensure memory access saftey
+    Various style refactors
+    Memory analysis debug code 
+
 R1.1.1  C. Frisch 07-Apr-2026
     Added in missing AO record support for the GTR DTYP from vmeUtils-R0-0-1
 

@@ -795,11 +795,11 @@ static long waveform_read(dbCommon *precord)
 
 /* Temporary diagnostic - resolve relocated addresses from a crash dump.
  * Call from st.cmd after ld() with addresses from the previous boot. */
+/*
 typedef struct { const char *name; void *addr; } gtrSym;
 
 void gtrWhere(unsigned long a)
 {
-    //static const gtrSym tbl[] = { /* ...as before... */ {0,0} };
     static const gtrSym tbl[] = {
         {"myCallback",            (void*)myCallback},
         {"interruptHandler",      (void*)interruptHandler},
@@ -836,3 +836,4 @@ void gtrDumpSyms(void)
     printf("longout_write        %p\n", (void*)longout_write);
     printf("common_init_record   %p\n", (void*)common_init_record);
 }
+*/
