@@ -21,12 +21,17 @@
 #include <epicsThread.h>
 #include <epicsExit.h>
 #include <epicsInterrupt.h>
+#include <errlog.h>
 #include <drvSup.h>
 #include <devLib.h>
 #include <link.h>
 
 #include "drvV965.h"
 #include "drvV965p.h"
+
+// The V965 multi-event buffer is 0x2000 bytes == 2048 D32 words. Used only as an
+// upper bound on how long the ISR may spin draining it.
+static const int CAEN_MEB_MAX_WORDS = 2048;
 
 /* Not necessary in rtems 4.9 */
 /* extern "C" void printk( char *fmt, ...); */
@@ -60,6 +65,8 @@ drvCaenV965Device()
         // We'll use epicsEventCreate here.
         //
         wakeupCall = epicsEventCreate( epicsEventEmpty);
+        if( wakeupCall == NULL)
+                errlogPrintf( "drvCaenV965Device: epicsEventCreate() failed - wait() and ISR signalling disabled\n");
 
         for( int i = 0;i < CAEN_NUM_CHAN;i++)
                 sampleState[i] = 0;
@@ -81,16 +88,17 @@ init()
                 unsigned  level = pvt->int_level;
                 pvt->pBoard->bitSet1.set = drvCaenV965Registers::BS1_SoftReset;
                 pvt->pBoard->bitSet1.clear = drvCaenV965Registers::BS1_SoftReset;
-                if( level)
-                        {
-                        devConnectInterruptVME( vector, (void (*)(void *)) &drvCaenV965Device::isr,(void *) pvt);
-                        pvt->pBoard->EventTriggerRegister = 1;
-                        pvt->pBoard->config( vector,level);
-                        devEnableInterruptLevel( intVME,level);
-                        }
+
+                // Publish the software state and finish configuring the module
+                // BEFORE the board is allowed to interrupt. Previously the ISR was
+                // connected and the VME level enabled here, while ioscanpvt was
+                // still NULL and BS2_EmptyEnable - which the soft reset above just
+                // cleared - had not been restored. An interrupt arriving during the
+                // show() below then landed in an ISR that could neither queue a
+                // scan nor recognise an empty output buffer.
+                scanIoInit( &pvt->ioscanpvt);
                 pvt->pBoard->show();
                 pvt->pBoard->CrateSelect = 0;
-                pvt->pBoard->EventTriggerRegister = 1;
                 pvt->pBoard->bitSet2.set = drvCaenV965Registers::BS2_AllTrig  |
                                         drvCaenV965Registers::BS2_OverRangeEn |
                                         drvCaenV965Registers::BS2_LowThresholdEn |
@@ -98,7 +106,25 @@ init()
                                         drvCaenV965Registers::BS2_SlideEn;
                 pvt->pBoard->SlideConstant = 0;
                 pvt->pBoard->GeoAddress = 0;
-                scanIoInit( &pvt->ioscanpvt);
+
+                if( level)
+                        {
+                        // Do not ignore the connect status: on failure the vector is
+                        // left holding the BSP default handler, so arming the board
+                        // would only produce unhandled interrupts.
+                        long st = devConnectInterruptVME( vector, (void (*)(void *)) &drvCaenV965Device::isr,(void *) pvt);
+                        if( st)
+                                {
+                                errlogPrintf( "drvCaenV965Device::init() board %d: devConnectInterruptVME( vector %u) failed (0x%lx) - board left disarmed\n",
+                                        i, vector, st);
+                                continue;
+                                }
+                        pvt->pBoard->config( vector,level);
+                        pvt->pBoard->EventTriggerRegister = 1;
+                        devEnableInterruptLevel( intVME,level);
+                        }
+                    else
+                        pvt->pBoard->EventTriggerRegister = 1;
                 }
         return 0;
         }
@@ -127,7 +153,7 @@ int drvCaenV965Device::
 caenV965Config( int board, size_t base, int addrSpace, int vector, int level, int states)
         {
         epicsAddressType addrType;
-        unsigned long probe;
+        unsigned short probe;
 
         if( board < 0 || board >= NUM_BOARDS)
                 {
@@ -176,8 +202,14 @@ caenV965Config( int board, size_t base, int addrSpace, int vector, int level, in
                 delete pvt;
                 return -1;
                 }
-        if( devReadProbe( sizeof( unsigned long),
-                          (volatile const void *)&pvt->pBoard,
+        // This must probe the board, not the pointer that points at it. The
+        // original passed &pvt->pBoard - the address of the pointer member inside
+        // the heap object - so the probe read DRAM, always succeeded, and left the
+        // "does not exist" branch below unreachable. FirmwareRevision (offset
+        // 0x1000, D16) is a safe non-destructive target; do NOT probe offset 0,
+        // which is the multi-event buffer and pops a word when read.
+        if( devReadProbe( sizeof( unsigned short),
+                          (volatile const void *)&pvt->pBoard->FirmwareRevision,
                           (void *) &probe) )
                 {
                 printf( "caenV965Config() The board %d at base address %x does not exist\n", board, base);
@@ -218,9 +250,20 @@ isr( void *pdev)
         int chan;
         int range;
         unsigned long event = pThis->event+1;
+        int guard = CAEN_MEB_MAX_WORDS;
 
         while( ! eob)
                 {
+                // Never spin unbounded in interrupt context. OBT_valid_datum is 0,
+                // so an output buffer reading as 0x00000000 classifies as valid data
+                // for channel 0 and makes no progress; a bare OBT_header never sets
+                // eob either. Either case would hang the IOC here.
+                if( --guard < 0)
+                        {
+                        epicsInterruptContextMessage( "In drvCaenV965Device::isr() - output buffer drain did not terminate\n");
+                        break;
+                        }
+
                 buffer = pThis->pBoard->OutputBuffer[0];
 
                 type = (drvCaenV965Registers::OutputBufferWordType)( buffer&drvCaenV965Registers::OBT_mask);
@@ -261,9 +304,16 @@ isr( void *pdev)
                                 // We must reset for this to work
                                 pThis->event = event;
                                 pThis->currentState = pThis->numStates;
-                                scanIoRequest( pThis->ioscanpvt);
+                                if( pThis->ioscanpvt)
+                                        scanIoRequest( pThis->ioscanpvt);
 
-                                epicsEventSignal( pThis->wakeupCall);
+                                // epicsEventSignal() is a macro for
+                                // epicsEventMustTrigger() in base >= 3.15, which calls
+                                // cantProceed() on failure. cantProceed() takes a
+                                // mutex, sleeps and suspends the caller - all illegal
+                                // in interrupt context. Use the non-aborting form.
+                                if( pThis->wakeupCall)
+                                        (void) epicsEventTrigger( pThis->wakeupCall);
                                 }
                         // Now, check to see if we are really done.
                         if( pThis->pBoard->StatusRegister2 & drvCaenV965Registers::ST2_BufferEmpty)
@@ -272,7 +322,8 @@ isr( void *pdev)
 
                 case drvCaenV965Registers::OBT_not_valid_datum:
                 default:
-                        scanIoRequest( pThis->ioscanpvt);
+                        if( pThis->ioscanpvt)
+                                scanIoRequest( pThis->ioscanpvt);
                         eob = 1;
                         epicsInterruptContextMessage("In drvCaenV965Device::isr() - Rec OBT_not_valid_datum\n");
                         break;
